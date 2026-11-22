@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boody Portal</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: #0b0d17;
+      color: #f1f5f9;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: #141829;
+      border: 1px solid #252c4a;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      margin: 0 0 6px;
+      text-align: center;
+      font-size: 24px;
+    }
+    p.sub {
+      margin: 0 0 18px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .btn-link {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      padding: 15px 12px;
+      border-radius: 12px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .btn-link:hover {
+      background: #293548;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Boody Portal</h1>
+    <p class="sub">وصول سريع للمنصات</p>
+    <div class="links">
+      <a class="btn-link" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a class="btn-link" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a class="btn-link" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a class="btn-link" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+  </div>
+</body>
+</html>
