@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BOODY PORTAL | لوحة الموقع</title>
+  <title>Abdelrahman | عبدالرحمن</title>
   <style>
     :root {
       --bg-main: #060b0a;
@@ -34,7 +34,7 @@
         radial-gradient(circle at 50% 0%, var(--bg-grad-1), transparent 44%),
         radial-gradient(circle at 88% 28%, var(--bg-grad-2), transparent 46%),
         var(--bg-main);
-      padding: 20px 14px 42px;
+      padding: 20px 14px 44px;
       display: flex;
       justify-content: center;
       transition: background 0.35s ease, color 0.25s ease;
@@ -51,7 +51,7 @@
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 28px 20px;
-      margin-bottom: 18px;
+      margin: 24px auto 18px;
       text-align: center;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
     }
@@ -119,7 +119,7 @@
       transform: translateY(-2px);
     }
 
-    /* شريط لوحة الموقع و 30 ميكس ألوان */
+    /* شريط لوحة الموقع و ميكس الألوان */
     .topbar {
       display: flex;
       align-items: center;
@@ -194,7 +194,7 @@
     /* الهيدر والشعار الدائري */
     .hero {
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .avatar-ring {
@@ -221,7 +221,7 @@
     }
 
     .brand-title {
-      font-size: 25px;
+      font-size: 24px;
       font-weight: 800;
       margin-bottom: 4px;
     }
@@ -236,32 +236,76 @@
       color: var(--muted);
     }
 
-    /* 3 بطاقات معلومات */
+    /* بطاقتا المعلومات (الاسم الرسمي + سريع) */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
     .stat-card {
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 10px 6px;
+      padding: 12px 10px;
       text-align: center;
     }
 
     .stat-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       color: var(--text);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .stat-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
+    }
+
+    /* تمركز اللينكات السريعة في نص الصفحة */
+    .center-stage {
+      margin-top: 12px;
+      margin-bottom: 18px;
+    }
+
+    .quick-trigger-banner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      color: var(--text);
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .quick-trigger-banner:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .quick-trigger-main {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .quick-trigger-cta {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--btn-text);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      padding: 6px 12px;
+      border-radius: 10px;
+      flex-shrink: 0;
     }
 
     /* الكروت الرئيسية */
@@ -578,7 +622,7 @@
         <div class="topbar-title">لوحة الموقع</div>
         <div class="topbar-actions">
           <button type="button" id="cycleThemeBtn" class="pill-btn">🎨 تغيير الألوان</button>
-          <button type="button" id="openThemesMenuBtn" class="pill-btn" id="themeBadge">ثيم 1/30</button>
+          <button type="button" id="openThemesMenuBtn" class="pill-btn">ثيم 1/30</button>
         </div>
       </div>
 
@@ -591,166 +635,168 @@
 
       <header class="hero">
         <div class="avatar-ring">
-          <div class="avatar-inner">B</div>
+          <div class="avatar-inner">A</div>
         </div>
-        <div class="brand-title">BOODY <span>|</span> بودى</div>
+        <div class="brand-title">Abdelrahman <span>|</span> عبدالرحمن</div>
         <div class="brand-sub">لوحة الوصول السريع ومعلومات التواصل</div>
       </header>
 
       <section class="stats-grid" aria-label="مميزات الموقع">
         <div class="stat-card">
-          <div class="stat-title">👑 بودى</div>
+          <div class="stat-title">👑 عبدالرحمن</div>
           <div class="stat-desc">الاسم الرسمي</div>
         </div>
         <div class="stat-card">
           <div class="stat-title">⚡ سريع</div>
-          <div class="stat-desc">كل لينكاتي هنا</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-title">🎨 30 ميكس</div>
-          <div class="stat-desc">ألوان متجددة</div>
+          <div class="stat-desc">متوفر العديد من اللينكات هنا</div>
         </div>
       </section>
 
-      <!-- قسم 01: اختيار سريع -->
-      <section id="stepOneCard" class="panel">
-        <div class="step-head">
-          <div>
-            <div class="step-title">اختر من القائمة</div>
-            <div class="step-sub">حدد الخيار ثم اضغط على زر اختر للدخول</div>
-          </div>
-          <div class="step-badge">01</div>
-        </div>
+      <!-- قسم اللينكات السريعة في منتصف الصفحة -->
+      <div id="quickCenterSection" class="center-stage">
+        <button type="button" id="quickBannerBtn" class="quick-trigger-banner">
+          <span class="quick-trigger-main">اللينكات السريعة</span>
+          <span class="quick-trigger-cta">اضغط هنا</span>
+        </button>
 
-        <div class="progress-bar">
-          <span class="active"></span>
-          <span class="active"></span>
-          <span class="active"></span>
-          <span></span>
-        </div>
-
-        <div class="featured-box">
-          <div class="featured-right">
-            <div class="icon-badge">⚡</div>
+        <section id="stepOneCard" class="panel">
+          <div class="step-head">
             <div>
-              <div class="featured-name">روابط سريعة</div>
-              <div class="featured-desc">قائمة الروابط المباشرة والوصول السريع</div>
+              <div class="step-title">اختر من القائمة</div>
+              <div class="step-sub">حدد الخيار ثم اضغط على زر اختر للدخول</div>
+            </div>
+            <div class="step-badge">01</div>
+          </div>
+
+          <div class="progress-bar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span></span>
+          </div>
+
+          <div class="featured-box">
+            <div class="featured-right">
+              <div class="icon-badge">⚡</div>
+              <div>
+                <div class="featured-name">روابط سريعة</div>
+                <div class="featured-desc">متوفر العديد من اللينكات هنا</div>
+              </div>
+            </div>
+            <div class="tag-selected">محدد</div>
+          </div>
+
+          <select id="quickSelect" class="select-input" aria-label="اختر المنصة">
+            <option value="https://www.youtube.com">YouTube — فتح موقع يوتيوب</option>
+            <option value="https://www.tiktok.com">TikTok — فتح موقع تيك توك</option>
+            <option value="https://www.google.com">Google — بحث جوجل السريع</option>
+            <option value="https://gemini.google.com">Gemini — فتح مساعد جيميناي</option>
+            <option value="https://chatgpt.com">ChatGPT — فتح شات جي بي تي</option>
+            <option value="https://www.instagram.com">Instagram — فتح موقع إنستجرام</option>
+            <option value="https://www.facebook.com">Facebook — فتح موقع فيسبوك</option>
+            <option value="https://www.messenger.com">Messenger — فتح ماسنجر</option>
+            <option value="https://web.whatsapp.com">WhatsApp — فتح واتساب ويب</option>
+          </select>
+
+          <div class="dual-actions">
+            <button type="button" id="backToWelcomeBtn" class="btn-ghost">الترحيب</button>
+            <button type="button" id="chooseGoBtn" class="btn-primary">اختر ←</button>
+          </div>
+        </section>
+
+        <section id="stepTwoCard" class="panel">
+          <div class="step-head">
+            <div>
+              <div class="step-title">روابط سريعة</div>
+              <div class="step-sub">متوفر العديد من اللينكات هنا</div>
+            </div>
+            <div class="step-badge">02</div>
+          </div>
+
+          <div class="progress-bar">
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+            <span class="active"></span>
+          </div>
+
+          <div class="links-stack">
+            <div class="link-row">
+              <div>
+                <div class="link-title">YouTube</div>
+                <div class="link-sub">فتح موقع يوتيوب</div>
+              </div>
+              <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">TikTok</div>
+                <div class="link-sub">فتح موقع تيك توك</div>
+              </div>
+              <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">Google</div>
+                <div class="link-sub">بحث جوجل السريع</div>
+              </div>
+              <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">Gemini</div>
+                <div class="link-sub">فتح مساعد جيميناي</div>
+              </div>
+              <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">ChatGPT</div>
+                <div class="link-sub">فتح شات جي بي تي</div>
+              </div>
+              <a class="open-pill" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">Instagram</div>
+                <div class="link-sub">فتح موقع إنستجرام</div>
+              </div>
+              <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">Facebook</div>
+                <div class="link-sub">فتح موقع فيسبوك</div>
+              </div>
+              <a class="open-pill" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">Messenger</div>
+                <div class="link-sub">فتح ماسنجر</div>
+              </div>
+              <a class="open-pill" href="https://www.messenger.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+            </div>
+
+            <div class="link-row">
+              <div>
+                <div class="link-title">WhatsApp</div>
+                <div class="link-sub">فتح واتساب ويب</div>
+              </div>
+              <a class="open-pill" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
             </div>
           </div>
-          <div class="tag-selected">محدد</div>
-        </div>
 
-        <select id="quickSelect" class="select-input" aria-label="اختر المنصة">
-          <option value="https://www.youtube.com">YouTube — فتح موقع يوتيوب</option>
-          <option value="https://www.tiktok.com">TikTok — فتح موقع تيك توك</option>
-          <option value="https://www.google.com">Google — بحث جوجل السريع</option>
-          <option value="https://gemini.google.com">Gemini — فتح مساعد جيميناي</option>
-          <option value="https://chatgpt.com">ChatGPT — فتح شات جي بي تي</option>
-          <option value="https://www.instagram.com">Instagram — فتح موقع إنستجرام</option>
-          <option value="https://www.facebook.com">Facebook — فتح موقع فيسبوك</option>
-          <option value="https://www.messenger.com">Messenger — فتح ماسنجر</option>
-          <option value="https://web.whatsapp.com">WhatsApp — فتح واتساب ويب</option>
-        </select>
-
-        <div class="dual-actions">
-          <button type="button" id="backToWelcomeBtn" class="btn-ghost">الترحيب</button>
-          <button type="button" id="chooseGoBtn" class="btn-primary">اختر ←</button>
-        </div>
-      </section>
-
-      <!-- قسم 02: روابط سريعة -->
-      <section id="stepTwoCard" class="panel">
-        <div class="step-head">
-          <div>
-            <div class="step-title">روابط سريعة</div>
-            <div class="step-sub">وصول سريع ومباشر إلى المواقع المفضلة</div>
-          </div>
-          <div class="step-badge">02</div>
-        </div>
-
-        <div class="progress-bar">
-          <span class="active"></span>
-          <span class="active"></span>
-          <span class="active"></span>
-          <span class="active"></span>
-        </div>
-
-        <div class="links-stack">
-          <div class="link-row">
-            <div>
-              <div class="link-title">YouTube</div>
-              <div class="link-sub">فتح موقع يوتيوب</div>
-            </div>
-            <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">TikTok</div>
-              <div class="link-sub">فتح موقع تيك توك</div>
-            </div>
-            <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">Google</div>
-              <div class="link-sub">بحث جوجل السريع</div>
-            </div>
-            <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">Gemini</div>
-              <div class="link-sub">فتح مساعد جيميناي</div>
-            </div>
-            <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">ChatGPT</div>
-              <div class="link-sub">فتح شات جي بي تي</div>
-            </div>
-            <a class="open-pill" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">Instagram</div>
-              <div class="link-sub">فتح موقع إنستجرام</div>
-            </div>
-            <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">Facebook</div>
-              <div class="link-sub">فتح موقع فيسبوك</div>
-            </div>
-            <a class="open-pill" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">Messenger</div>
-              <div class="link-sub">فتح ماسنجر</div>
-            </div>
-            <a class="open-pill" href="https://www.messenger.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <div class="link-title">WhatsApp</div>
-              <div class="link-sub">فتح واتساب ويب</div>
-            </div>
-            <a class="open-pill" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
-          </div>
-        </div>
-
-        <button type="button" id="backToChoiceBtn" class="back-btn">رجوع للاختيار</button>
-      </section>
+          <button type="button" id="backToChoiceBtn" class="back-btn">رجوع للاختيار</button>
+        </section>
+      </div>
 
       <!-- قسم التواصل المباشر -->
       <section class="panel">
@@ -824,6 +870,7 @@
     const themeSelect = document.getElementById("themeSelect");
     const randomThemeBtn = document.getElementById("randomThemeBtn");
 
+    const quickBannerBtn = document.getElementById("quickBannerBtn");
     const stepOneCard = document.getElementById("stepOneCard");
     const stepTwoCard = document.getElementById("stepTwoCard");
     const quickSelect = document.getElementById("quickSelect");
@@ -894,6 +941,10 @@
       applyTheme(next);
     });
 
+    quickBannerBtn.addEventListener("click", () => {
+      stepTwoCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
     chooseGoBtn.addEventListener("click", () => {
       const url = quickSelect.value;
       if (url) {
@@ -902,7 +953,7 @@
     });
 
     backToChoiceBtn.addEventListener("click", () => {
-      stepOneCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      stepOneCard.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
     document.querySelectorAll(".copy-btn").forEach((btn) => {
