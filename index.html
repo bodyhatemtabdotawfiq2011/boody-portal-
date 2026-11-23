@@ -43,14 +43,16 @@
       transition: background 0.35s ease, color 0.25s ease;
     }
 
-    body.panel-active {
-      align-items: flex-start;
-      background: var(--bg-main);
+    body.auth-mode {
+      background: #070503;
     }
 
-    /* خلفية الفيديو الكاملة لصفحات ما بعد الترحيب فقط */
-    .pages-video-bg {
-      display: none;
+    body.panel-active {
+      align-items: flex-start;
+    }
+
+    /* خلفية الفيديو الخاصة بواجهة الدخول فقط */
+    .auth-video-bg {
       position: fixed;
       inset: 0;
       width: 100vw;
@@ -58,29 +60,25 @@
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
-      background: var(--bg-main);
+      background: #070503;
     }
 
-    body.panel-active .pages-video-bg {
-      display: block;
+    body.panel-active .auth-video-bg {
+      display: none;
     }
 
-    .pages-video-bg video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      min-width: 100%;
-      min-height: 100%;
+    .auth-video-bg video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
+      filter: brightness(0.75) contrast(1.06);
     }
 
-    .pages-video-overlay {
+    .auth-video-scrim {
       position: fixed;
       inset: 0;
-      background: rgba(4, 8, 8, 0.36);
+      background: linear-gradient(180deg, rgba(7, 5, 3, 0.38), rgba(7, 5, 3, 0.66));
       pointer-events: none;
     }
 
@@ -91,79 +89,154 @@
       max-width: 470px;
     }
 
-    /* الواجهة 1: شاشة الترحيب */
-    .welcome-card {
+    /* واجهة الدخول الجديدة */
+    .auth-card {
       width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: rgba(14, 11, 9, 0.84);
+      border: 1px solid rgba(251, 146, 60, 0.28);
       border-radius: 24px;
-      padding: 28px 20px;
+      padding: 26px 20px;
       margin: 0 auto;
       text-align: center;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
     }
 
-    .welcome-title {
-      font-size: 28px;
+    .auth-brand-title {
+      font-size: 25px;
       font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 16px;
+      color: var(--text);
+      margin-bottom: 6px;
       line-height: 1.35;
     }
 
-    .dots {
-      display: flex;
-      justify-content: center;
+    .auth-brand-title span {
+      color: #fb923c;
+      margin: 0 6px;
+    }
+
+    .auth-subtitle {
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin-bottom: 18px;
     }
 
-    .dots span {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid var(--border);
-    }
-
-    .speed-box {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-
-    .speed-label {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .speed-val {
-      font-size: 22px;
+    .auth-tab-btn {
+      background: rgba(28, 22, 18, 0.88);
+      color: #e2e8f0;
+      border: 1px solid rgba(251, 146, 60, 0.24);
+      border-radius: 14px;
+      padding: 12px 10px;
+      font-family: inherit;
+      font-size: 14px;
       font-weight: 800;
-      color: var(--accent);
+      cursor: pointer;
+      transition: all 0.16s ease;
     }
 
-    .enter-btn {
+    .auth-tab-btn.active {
+      background: linear-gradient(90deg, #f97316, #fb923c);
+      color: #1a0b02;
+      border-color: transparent;
+      box-shadow: 0 8px 22px rgba(249, 115, 22, 0.35);
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: right;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .field-input {
       width: 100%;
+      background: rgba(24, 19, 16, 0.92);
+      color: #f8fafc;
+      border: 1px solid rgba(251, 146, 60, 0.28);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.16s ease;
+    }
+
+    .field-input:focus {
+      border-color: #fb923c;
+    }
+
+    .field-input.ltr-input {
+      direction: ltr;
+      text-align: left;
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      margin-top: 4px;
       border: none;
       border-radius: 16px;
-      padding: 16px 18px;
+      padding: 15px 18px;
       font-family: inherit;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
-      color: var(--btn-text);
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 26px var(--accent-glow);
+      color: #1a0b02;
+      background: linear-gradient(90deg, #f97316, #fb923c);
+      box-shadow: 0 10px 26px rgba(249, 115, 22, 0.35);
       cursor: pointer;
       transition: transform 0.16s ease, filter 0.16s ease;
     }
 
-    .enter-btn:hover {
-      filter: brightness(1.07);
+    .auth-submit-btn:hover {
+      filter: brightness(1.06);
       transform: translateY(-2px);
+    }
+
+    .auth-msg {
+      min-height: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .auth-msg.error {
+      color: #fca5a5;
+    }
+
+    .auth-msg.success {
+      color: #6ee7b7;
+    }
+
+    .auth-note {
+      margin-top: 16px;
+      background: rgba(24, 18, 14, 0.86);
+      border: 1px solid rgba(251, 146, 60, 0.22);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: #fde68a;
+      text-align: right;
     }
 
     /* شريط لوحة الموقع و ميكس الألوان */
@@ -599,27 +672,56 @@
     }
   </style>
 </head>
-<body>
-  <div class="pages-video-bg" aria-hidden="true">
-    <video id="bgVideo" autoplay muted loop playsinline preload="auto">
-      <source src="./bg.mp4" type="video/mp4" />
+<body class="auth-mode">
+  <div class="auth-video-bg" aria-hidden="true">
+    <video id="authVideo" autoplay muted loop playsinline preload="auto">
+      <source src="./auth-bg.mp4" type="video/mp4" />
     </video>
-    <div class="pages-video-overlay"></div>
+    <div class="auth-video-scrim"></div>
   </div>
 
   <div class="app">
-    <!-- الواجهة 1: الترحيب -->
-    <section id="welcomeScreen" class="welcome-card">
-      <h1 class="welcome-title">مرحبا بكم في موقعنا</h1>
-      <div class="dots" aria-hidden="true">
-        <span></span>
-        <span></span>
+    <!-- واجهة الدخول: إنشاء حساب جديد / تسجيل الدخول -->
+    <section id="welcomeScreen" class="auth-card">
+      <h1 class="auth-brand-title">Abdelrahman <span>|</span> عبدالرحمن</h1>
+      <p class="auth-subtitle">أهلاً بك، أنشئ حسابك أو سجل الدخول للمتابعة</p>
+
+      <div class="auth-tabs" role="tablist" aria-label="خيارات الدخول">
+        <button type="button" id="tabRegisterBtn" class="auth-tab-btn active" role="tab" aria-selected="true">إنشاء حساب جديد</button>
+        <button type="button" id="tabLoginBtn" class="auth-tab-btn" role="tab" aria-selected="false">تسجيل الدخول</button>
       </div>
-      <div class="speed-box">
-        <div class="speed-label">السرعة</div>
-        <div class="speed-val">فوري</div>
-      </div>
-      <button type="button" id="enterBtn" class="enter-btn">اضغط للدخول ←</button>
+
+      <!-- نموذج إنشاء حساب جديد -->
+      <form id="registerForm" class="auth-form" autocomplete="off">
+        <div class="field-group">
+          <label for="regPhone" class="field-label">رقم التليفون</label>
+          <input id="regPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
+        </div>
+        <div class="field-group">
+          <label for="regPassword" class="field-label">كلمة السر</label>
+          <input id="regPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة سر قوية" required />
+        </div>
+        <button type="submit" class="auth-submit-btn">إنشاء حساب والدخول ←</button>
+        <div id="registerMsg" class="auth-msg" aria-live="polite"></div>
+      </form>
+
+      <!-- نموذج تسجيل الدخول -->
+      <form id="loginForm" class="auth-form hidden" autocomplete="off">
+        <div class="field-group">
+          <label for="loginPhone" class="field-label">رقم التليفون</label>
+          <input id="loginPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
+        </div>
+        <div class="field-group">
+          <label for="loginPassword" class="field-label">كلمة السر</label>
+          <input id="loginPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة السر" required />
+        </div>
+        <button type="submit" class="auth-submit-btn">تسجيل الدخول ←</button>
+        <div id="loginMsg" class="auth-msg" aria-live="polite"></div>
+      </form>
+
+      <p class="auth-note">
+        ملحوظة: يجب عليك حفظ رقم الهاتف و كلمه السر اللى انشات بها حسابك ولا يمكنك ان تضيف حساب جديد بنفس الرقم
+      </p>
     </section>
 
     <!-- الواجهة 2: لوحة الموقع الرئيسية -->
@@ -866,13 +968,27 @@
       { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.20)", g2: "rgba(236, 72, 153, 0.20)", s1: "rgba(14, 19, 31, 0.92)", s2: "rgba(21, 28, 44, 0.92)", b: "rgba(52, 211, 153, 0.26)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.35)", bt: "#04140f" }
     ];
 
+    const ACCOUNTS_STORAGE_KEY = "boodyPortalAccountsV1";
+
     const root = document.documentElement;
-    const bgVideo = document.getElementById("bgVideo");
+    const authVideo = document.getElementById("authVideo");
     const welcomeScreen = document.getElementById("welcomeScreen");
     const dashboardScreen = document.getElementById("dashboardScreen");
     const thirdScreen = document.getElementById("thirdScreen");
 
-    const enterBtn = document.getElementById("enterBtn");
+    const tabRegisterBtn = document.getElementById("tabRegisterBtn");
+    const tabLoginBtn = document.getElementById("tabLoginBtn");
+    const registerForm = document.getElementById("registerForm");
+    const loginForm = document.getElementById("loginForm");
+
+    const regPhoneInput = document.getElementById("regPhone");
+    const regPasswordInput = document.getElementById("regPassword");
+    const registerMsg = document.getElementById("registerMsg");
+
+    const loginPhoneInput = document.getElementById("loginPhone");
+    const loginPasswordInput = document.getElementById("loginPassword");
+    const loginMsg = document.getElementById("loginMsg");
+
     const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
     const backFromThirdBtn = document.getElementById("backFromThirdBtn");
 
@@ -882,33 +998,152 @@
     const themeSelect = document.getElementById("themeSelect");
     const randomThemeBtn = document.getElementById("randomThemeBtn");
 
-    function ensureBgVideoPlaying() {
-      if (!bgVideo) return;
-      bgVideo.muted = true;
-      bgVideo.defaultMuted = true;
-      bgVideo.loop = true;
-      if (bgVideo.paused) {
-        bgVideo.play().catch(() => {});
+    function ensureAuthVideoPlaying() {
+      if (!authVideo || document.body.classList.contains("panel-active")) return;
+      authVideo.muted = true;
+      authVideo.defaultMuted = true;
+      authVideo.loop = true;
+      if (authVideo.paused) {
+        authVideo.play().catch(() => {});
       }
     }
 
+    ensureAuthVideoPlaying();
+    document.addEventListener("pointerdown", ensureAuthVideoPlaying, { passive: true });
     document.addEventListener("visibilitychange", () => {
-      if (!document.hidden && document.body.classList.contains("panel-active")) {
-        ensureBgVideoPlaying();
+      if (!document.hidden) ensureAuthVideoPlaying();
+    });
+    if (authVideo) {
+      authVideo.addEventListener("pause", ensureAuthVideoPlaying);
+      authVideo.addEventListener("ended", () => {
+        authVideo.currentTime = 0;
+        ensureAuthVideoPlaying();
+      });
+    }
+
+    function normalizePhone(raw) {
+      return String(raw || "")
+        .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
+        .replace(/[^\d]/g, "")
+        .trim();
+    }
+
+    function getSavedAccounts() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(ACCOUNTS_STORAGE_KEY) || "{}");
+        return parsed && typeof parsed === "object" ? parsed : {};
+      } catch (_) {
+        return {};
       }
+    }
+
+    function saveAccounts(accountsObj) {
+      localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accountsObj));
+    }
+
+    function setAuthTab(mode) {
+      const isRegister = mode === "register";
+      tabRegisterBtn.classList.toggle("active", isRegister);
+      tabRegisterBtn.setAttribute("aria-selected", String(isRegister));
+      tabLoginBtn.classList.toggle("active", !isRegister);
+      tabLoginBtn.setAttribute("aria-selected", String(!isRegister));
+
+      registerForm.classList.toggle("hidden", !isRegister);
+      loginForm.classList.toggle("hidden", isRegister);
+      registerMsg.textContent = "";
+      loginMsg.textContent = "";
+      registerMsg.className = "auth-msg";
+      loginMsg.className = "auth-msg";
+    }
+
+    tabRegisterBtn.addEventListener("click", () => setAuthTab("register"));
+    tabLoginBtn.addEventListener("click", () => setAuthTab("login"));
+
+    function openMainDashboard() {
+      if (authVideo) authVideo.pause();
+      document.body.classList.remove("auth-mode");
+      document.body.classList.add("panel-active");
+      welcomeScreen.classList.add("hidden");
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const phone = normalizePhone(regPhoneInput.value);
+      const password = regPasswordInput.value;
+
+      registerMsg.className = "auth-msg";
+      registerMsg.textContent = "";
+
+      if (phone.length < 8) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "من فضلك أدخل رقم هاتف صحيح.";
+        return;
+      }
+
+      if (password.trim().length < 4) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "كلمة السر يجب ألا تقل عن 4 أحرف أو أرقام.";
+        return;
+      }
+
+      const accounts = getSavedAccounts();
+      if (Object.prototype.hasOwnProperty.call(accounts, phone)) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "هذا الرقم مسجل بالفعل ولا يمكن إنشاء حساب جديد بنفس الرقم.";
+        return;
+      }
+
+      accounts[phone] = {
+        password: password,
+        createdAt: Date.now()
+      };
+      saveAccounts(accounts);
+
+      registerMsg.className = "auth-msg success";
+      registerMsg.textContent = "تم إنشاء الحساب وحفظه بنجاح...";
+      setTimeout(() => {
+        openMainDashboard();
+      }, 350);
     });
 
-    if (bgVideo) {
-      bgVideo.addEventListener("pause", () => {
-        if (document.body.classList.contains("panel-active")) {
-          ensureBgVideoPlaying();
-        }
-      });
-      bgVideo.addEventListener("ended", () => {
-        bgVideo.currentTime = 0;
-        ensureBgVideoPlaying();
-      });
-    }
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const phone = normalizePhone(loginPhoneInput.value);
+      const password = loginPasswordInput.value;
+
+      loginMsg.className = "auth-msg";
+      loginMsg.textContent = "";
+
+      if (!phone || !password) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "أدخل رقم الهاتف وكلمة السر.";
+        return;
+      }
+
+      const accounts = getSavedAccounts();
+      const account = accounts[phone];
+
+      if (!account) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "هذا الرقم غير مسجل، أنشئ حساباً جديداً أولاً.";
+        return;
+      }
+
+      if (account.password !== password) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "كلمة السر غير صحيحة.";
+        return;
+      }
+
+      loginMsg.className = "auth-msg success";
+      loginMsg.textContent = "تم تسجيل الدخول بنجاح...";
+      setTimeout(() => {
+        openMainDashboard();
+      }, 300);
+    });
 
     let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
     if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
@@ -943,26 +1178,15 @@
 
     applyTheme(currentThemeIndex);
 
-    enterBtn.addEventListener("click", () => {
-      welcomeScreen.classList.add("hidden");
-      thirdScreen.classList.add("hidden");
-      dashboardScreen.classList.remove("hidden");
-      document.body.classList.add("panel-active");
-      ensureBgVideoPlaying();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
     openThirdScreenBtn.addEventListener("click", () => {
       dashboardScreen.classList.add("hidden");
       thirdScreen.classList.remove("hidden");
-      ensureBgVideoPlaying();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     backFromThirdBtn.addEventListener("click", () => {
       thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
-      ensureBgVideoPlaying();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
