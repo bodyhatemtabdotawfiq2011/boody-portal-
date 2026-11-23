@@ -36,8 +36,13 @@
         var(--bg-main);
       padding: 20px 14px 44px;
       display: flex;
+      align-items: center;
       justify-content: center;
       transition: background 0.35s ease, color 0.25s ease;
+    }
+
+    body.dashboard-active {
+      align-items: flex-start;
     }
 
     .app {
@@ -45,13 +50,14 @@
       max-width: 470px;
     }
 
-    /* شاشة الترحيب */
+    /* شاشة الترحيب متمركزة في منتصف الشاشة */
     .welcome-card {
+      width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 28px 20px;
-      margin: 24px auto 18px;
+      margin: 0 auto;
       text-align: center;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
     }
@@ -266,7 +272,7 @@
 
     /* تمركز اللينكات السريعة في نص الصفحة */
     .center-stage {
-      margin-top: 12px;
+      margin-top: 14px;
       margin-bottom: 18px;
     }
 
@@ -491,7 +497,8 @@
     }
 
     .open-pill {
-      text-decoration: none;
+      border: none;
+      font-family: inherit;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       color: var(--btn-text);
       font-size: 13px;
@@ -499,6 +506,7 @@
       padding: 9px 14px;
       border-radius: 12px;
       flex-shrink: 0;
+      cursor: pointer;
       transition: transform 0.15s ease, filter 0.15s ease;
     }
 
@@ -602,7 +610,7 @@
 </head>
 <body>
   <div class="app">
-    <!-- واجهة الترحيب -->
+    <!-- واجهة الترحيب في منتصف الشاشة -->
     <section id="welcomeScreen" class="welcome-card">
       <h1 class="welcome-title">مرحبا بكم في موقعنا</h1>
       <div class="dots" aria-hidden="true">
@@ -659,6 +667,7 @@
           <span class="quick-trigger-cta">اضغط هنا</span>
         </button>
 
+        <!-- شاشة الاختيار 01 -->
         <section id="stepOneCard" class="panel">
           <div class="step-head">
             <div>
@@ -704,7 +713,8 @@
           </div>
         </section>
 
-        <section id="stepTwoCard" class="panel">
+        <!-- شاشة اللينكات الكاملة 02 (تظهر فقط بعد الضغط على اللينكات السريعة) -->
+        <section id="stepTwoCard" class="panel hidden">
           <div class="step-head">
             <div>
               <div class="step-title">روابط سريعة</div>
@@ -726,7 +736,7 @@
                 <div class="link-title">YouTube</div>
                 <div class="link-sub">فتح موقع يوتيوب</div>
               </div>
-              <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.youtube.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -734,7 +744,7 @@
                 <div class="link-title">TikTok</div>
                 <div class="link-sub">فتح موقع تيك توك</div>
               </div>
-              <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.tiktok.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -742,7 +752,7 @@
                 <div class="link-title">Google</div>
                 <div class="link-sub">بحث جوجل السريع</div>
               </div>
-              <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.google.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -750,7 +760,7 @@
                 <div class="link-title">Gemini</div>
                 <div class="link-sub">فتح مساعد جيميناي</div>
               </div>
-              <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://gemini.google.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -758,7 +768,7 @@
                 <div class="link-title">ChatGPT</div>
                 <div class="link-sub">فتح شات جي بي تي</div>
               </div>
-              <a class="open-pill" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://chatgpt.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -766,7 +776,7 @@
                 <div class="link-title">Instagram</div>
                 <div class="link-sub">فتح موقع إنستجرام</div>
               </div>
-              <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.instagram.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -774,7 +784,7 @@
                 <div class="link-title">Facebook</div>
                 <div class="link-sub">فتح موقع فيسبوك</div>
               </div>
-              <a class="open-pill" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.facebook.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -782,7 +792,7 @@
                 <div class="link-title">Messenger</div>
                 <div class="link-sub">فتح ماسنجر</div>
               </div>
-              <a class="open-pill" href="https://www.messenger.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://www.messenger.com">فتح الرابط</button>
             </div>
 
             <div class="link-row">
@@ -790,7 +800,7 @@
                 <div class="link-title">WhatsApp</div>
                 <div class="link-sub">فتح واتساب ويب</div>
               </div>
-              <a class="open-pill" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="open-pill" data-url="https://web.whatsapp.com">فتح الرابط</button>
             </div>
           </div>
 
@@ -877,6 +887,26 @@
     const chooseGoBtn = document.getElementById("chooseGoBtn");
     const backToChoiceBtn = document.getElementById("backToChoiceBtn");
 
+    function launchLink(url) {
+      if (!url) return;
+      const win = window.open(url, "_blank", "noopener,noreferrer");
+      if (!win) {
+        window.location.href = url;
+      }
+    }
+
+    function openAllLinksScreen() {
+      stepOneCard.classList.add("hidden");
+      stepTwoCard.classList.remove("hidden");
+      stepTwoCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function openChoiceScreen() {
+      stepTwoCard.classList.add("hidden");
+      stepOneCard.classList.remove("hidden");
+      stepOneCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
     let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
     if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
       currentThemeIndex = 0;
@@ -913,12 +943,16 @@
     enterBtn.addEventListener("click", () => {
       welcomeScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
+      document.body.classList.add("dashboard-active");
+      stepTwoCard.classList.add("hidden");
+      stepOneCard.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     backToWelcomeBtn.addEventListener("click", () => {
       dashboardScreen.classList.add("hidden");
       welcomeScreen.classList.remove("hidden");
+      document.body.classList.remove("dashboard-active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -941,19 +975,18 @@
       applyTheme(next);
     });
 
-    quickBannerBtn.addEventListener("click", () => {
-      stepTwoCard.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
+    quickBannerBtn.addEventListener("click", openAllLinksScreen);
 
     chooseGoBtn.addEventListener("click", () => {
-      const url = quickSelect.value;
-      if (url) {
-        window.open(url, "_blank", "noopener,noreferrer");
-      }
+      launchLink(quickSelect.value);
     });
 
-    backToChoiceBtn.addEventListener("click", () => {
-      stepOneCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    backToChoiceBtn.addEventListener("click", openChoiceScreen);
+
+    document.querySelectorAll(".open-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        launchLink(btn.getAttribute("data-url"));
+      });
     });
 
     document.querySelectorAll(".copy-btn").forEach((btn) => {
