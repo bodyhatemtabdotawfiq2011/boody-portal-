@@ -369,20 +369,56 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
-    .empty-links-box {
+    .links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       background: var(--surface-2);
-      border: 1px dashed var(--border);
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 24px 14px;
-      text-align: center;
+      padding: 14px;
+    }
+
+    .link-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .link-sub {
+      font-size: 12px;
       color: var(--muted);
+    }
+
+    .open-pill {
+      display: inline-block;
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: var(--btn-text);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
+      padding: 10px 16px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .open-pill:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
     }
 
     .back-btn {
       width: 100%;
-      margin-top: 12px;
+      margin-top: 14px;
       background: var(--surface-2);
       color: var(--text);
       border: 1px solid var(--border);
@@ -556,7 +592,7 @@
       </section>
     </main>
 
-    <!-- الواجهة 3: شاشة اللينكات (تظهر فقط عند الضغط على زر اللينكات السريعة - اضغط هنا) -->
+    <!-- الواجهة 3: شاشة اللينكات السريعة بالترتيب المطلوب -->
     <section id="thirdScreen" class="panel hidden">
       <div class="step-head">
         <div>
@@ -573,8 +609,54 @@
         <span class="active"></span>
       </div>
 
-      <div class="empty-links-box">
-        لا توجد لينكات مضافة حالياً
+      <div class="links-stack">
+        <div class="link-row">
+          <div>
+            <div class="link-title">TikTok</div>
+            <div class="link-sub">فتح تيك توك</div>
+          </div>
+          <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">WhatsApp</div>
+            <div class="link-sub">فتح واتساب</div>
+          </div>
+          <a class="open-pill" href="https://api.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">YouTube</div>
+            <div class="link-sub">فتح يوتيوب</div>
+          </div>
+          <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">Google</div>
+            <div class="link-sub">بحث جوجل</div>
+          </div>
+          <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">Instagram</div>
+            <div class="link-sub">فتح إنستاجرام</div>
+          </div>
+          <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
+
+        <div class="link-row">
+          <div>
+            <div class="link-title">Gemini</div>
+            <div class="link-sub">فتح جيميناى</div>
+          </div>
+          <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+        </div>
       </div>
 
       <button type="button" id="backFromThirdBtn" class="back-btn">رجوع</button>
