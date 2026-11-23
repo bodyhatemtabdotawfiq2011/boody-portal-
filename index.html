@@ -30,98 +30,58 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
       color: var(--text);
-      background-color: var(--bg-main);
+      background:
+        radial-gradient(circle at 50% 0%, var(--bg-grad-1), transparent 44%),
+        radial-gradient(circle at 88% 28%, var(--bg-grad-2), transparent 46%),
+        var(--bg-main);
       padding: 20px 14px 44px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow-x: hidden;
-      transition: background-color 0.35s ease, color 0.25s ease;
+      transition: background 0.35s ease, color 0.25s ease;
     }
 
     body.panel-active {
       align-items: flex-start;
+      background: var(--bg-main);
     }
 
-    /* خلفية الإضاءة المتحركة */
-    .animated-bg {
+    /* خلفية الفيديو الكاملة لصفحات ما بعد الترحيب فقط */
+    .pages-video-bg {
+      display: none;
       position: fixed;
       inset: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
       background: var(--bg-main);
-      transition: background 0.35s ease;
     }
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(75px);
-      opacity: 0.9;
-      will-change: transform;
+    body.panel-active .pages-video-bg {
+      display: block;
     }
 
-    .orb-1 {
-      width: 340px;
-      height: 340px;
-      top: -80px;
-      right: -70px;
-      background: var(--bg-grad-1);
-      animation: floatOrb1 14s ease-in-out infinite alternate;
+    .pages-video-bg video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .orb-2 {
-      width: 380px;
-      height: 380px;
-      bottom: -110px;
-      left: -80px;
-      background: var(--bg-grad-2);
-      animation: floatOrb2 18s ease-in-out infinite alternate;
-    }
-
-    .orb-3 {
-      width: 240px;
-      height: 240px;
-      top: 42%;
-      left: 50%;
-      background: var(--bg-grad-1);
-      opacity: 0.55;
-      animation: floatOrb3 12s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatOrb1 {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-      50% {
-        transform: translate(-55px, 65px) scale(1.12);
-      }
-      100% {
-        transform: translate(25px, 95px) scale(0.95);
-      }
-    }
-
-    @keyframes floatOrb2 {
-      0% {
-        transform: translate(0px, 0px) scale(1);
-      }
-      50% {
-        transform: translate(70px, -55px) scale(1.15);
-      }
-      100% {
-        transform: translate(-30px, -85px) scale(0.92);
-      }
-    }
-
-    @keyframes floatOrb3 {
-      0% {
-        transform: translate(-50%, -50%) scale(0.9);
-      }
-      100% {
-        transform: translate(-35%, -65%) scale(1.2);
-      }
+    .pages-video-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 8, 0.36);
+      pointer-events: none;
     }
 
     .app {
@@ -141,7 +101,6 @@
       margin: 0 auto;
       text-align: center;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
     }
 
     .welcome-title {
@@ -402,7 +361,6 @@
       padding: 16px;
       margin-bottom: 14px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
-      backdrop-filter: blur(10px);
     }
 
     .step-head {
@@ -642,10 +600,11 @@
   </style>
 </head>
 <body>
-  <div class="animated-bg" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+  <div class="pages-video-bg" aria-hidden="true">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+      <source src="./bg.mp4" type="video/mp4" />
+    </video>
+    <div class="pages-video-overlay"></div>
   </div>
 
   <div class="app">
@@ -875,39 +834,40 @@
 
   <script>
     const THEMES_30 = [
-      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.24)", g2: "rgba(6, 182, 212, 0.18)", s1: "rgba(12, 20, 19, 0.92)", s2: "rgba(18, 30, 28, 0.92)", b: "rgba(52, 211, 153, 0.25)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.35)", bt: "#04130e" },
-      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.26)", g2: "rgba(139, 92, 246, 0.20)", s1: "rgba(20, 14, 30, 0.92)", s2: "rgba(30, 21, 44, 0.92)", b: "rgba(244, 114, 182, 0.26)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.36)", bt: "#190612" },
-      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.24)", g2: "rgba(244, 63, 94, 0.20)", s1: "rgba(13, 18, 34, 0.92)", s2: "rgba(20, 27, 48, 0.92)", b: "rgba(56, 189, 248, 0.26)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.35)", bt: "#05121d" },
-      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.24)", g2: "rgba(234, 88, 12, 0.18)", s1: "rgba(24, 19, 10, 0.92)", s2: "rgba(34, 27, 14, 0.92)", b: "rgba(251, 191, 36, 0.25)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.34)", bt: "#1d1202" },
-      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.26)", g2: "rgba(217, 70, 239, 0.18)", s1: "rgba(18, 12, 30, 0.92)", s2: "rgba(27, 19, 44, 0.92)", b: "rgba(192, 132, 252, 0.26)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.36)", bt: "#150624" },
-      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.24)", g2: "rgba(45, 212, 191, 0.18)", s1: "rgba(10, 21, 34, 0.92)", s2: "rgba(15, 31, 48, 0.92)", b: "rgba(56, 189, 248, 0.24)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.34)", bt: "#041622" },
-      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.24)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(28, 11, 14, 0.92)", s2: "rgba(38, 16, 20, 0.92)", b: "rgba(248, 113, 113, 0.25)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.35)", bt: "#210508" },
-      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.24)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(18, 24, 10, 0.92)", s2: "rgba(26, 34, 15, 0.92)", b: "rgba(163, 230, 53, 0.25)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.34)", bt: "#121d03" },
-      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.24)", g2: "rgba(251, 191, 36, 0.18)", s1: "rgba(27, 13, 17, 0.92)", s2: "rgba(37, 19, 24, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.34)", bt: "#22060c" },
-      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.24)", g2: "rgba(59, 130, 246, 0.18)", s1: "rgba(10, 23, 21, 0.92)", s2: "rgba(15, 33, 30, 0.92)", b: "rgba(45, 212, 191, 0.25)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.34)", bt: "#041916" },
-      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.26)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(14, 14, 34, 0.92)", s2: "rgba(21, 21, 48, 0.92)", b: "rgba(129, 140, 248, 0.26)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.35)", bt: "#0b0b24" },
-      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.26)", g2: "rgba(250, 204, 21, 0.17)", s1: "rgba(28, 15, 8, 0.92)", s2: "rgba(38, 22, 12, 0.92)", b: "rgba(251, 146, 60, 0.26)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.36)", bt: "#210d02" },
-      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.22)", g2: "rgba(125, 211, 252, 0.18)", s1: "rgba(12, 24, 19, 0.92)", s2: "rgba(18, 34, 28, 0.92)", b: "rgba(110, 231, 183, 0.24)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.33)", bt: "#051911" },
-      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.25)", g2: "rgba(244, 63, 94, 0.19)", s1: "rgba(28, 11, 25, 0.92)", s2: "rgba(39, 16, 35, 0.92)", b: "rgba(232, 121, 249, 0.26)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.35)", bt: "#21051e" },
-      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.24)", g2: "rgba(167, 139, 250, 0.18)", s1: "rgba(12, 22, 32, 0.92)", s2: "rgba(18, 31, 45, 0.92)", b: "rgba(125, 211, 252, 0.25)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.34)", bt: "#041420" },
-      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.24)", g2: "rgba(99, 102, 241, 0.19)", s1: "rgba(22, 11, 25, 0.92)", s2: "rgba(31, 16, 35, 0.92)", b: "rgba(217, 70, 239, 0.25)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.35)", bt: "#1c0420" },
-      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.22)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(25, 19, 10, 0.92)", s2: "rgba(35, 27, 15, 0.92)", b: "rgba(250, 204, 21, 0.24)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.33)", bt: "#1c1402" },
-      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.26)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(10, 22, 27, 0.92)", s2: "rgba(15, 32, 39, 0.92)", b: "rgba(34, 211, 238, 0.26)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.36)", bt: "#03181e" },
-      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.23)", g2: "rgba(192, 132, 252, 0.18)", s1: "rgba(25, 14, 22, 0.92)", s2: "rgba(35, 20, 31, 0.92)", b: "rgba(244, 114, 182, 0.25)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.34)", bt: "#200718" },
-      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.24)", g2: "rgba(163, 230, 53, 0.17)", s1: "rgba(11, 22, 15, 0.92)", s2: "rgba(17, 32, 22, 0.92)", b: "rgba(74, 222, 128, 0.25)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.35)", bt: "#04190c" },
-      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.26)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(12, 17, 34, 0.92)", s2: "rgba(18, 25, 48, 0.92)", b: "rgba(96, 165, 250, 0.26)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.36)", bt: "#061126" },
-      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.24)", g2: "rgba(245, 158, 11, 0.17)", s1: "rgba(26, 11, 18, 0.92)", s2: "rgba(37, 16, 26, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.35)", bt: "#20040d" },
-      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.25)", g2: "rgba(34, 211, 238, 0.17)", s1: "rgba(16, 24, 11, 0.92)", s2: "rgba(24, 34, 16, 0.92)", b: "rgba(190, 242, 100, 0.25)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.34)", bt: "#131e03" },
-      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.26)", g2: "rgba(56, 189, 248, 0.18)", s1: "rgba(17, 12, 33, 0.92)", s2: "rgba(25, 18, 46, 0.92)", b: "rgba(167, 139, 250, 0.26)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.36)", bt: "#130729" },
-      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.24)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(28, 15, 12, 0.92)", s2: "rgba(38, 21, 17, 0.92)", b: "rgba(253, 186, 116, 0.25)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.34)", bt: "#210e05" },
-      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.24)", g2: "rgba(99, 102, 241, 0.18)", s1: "rgba(10, 21, 26, 0.92)", s2: "rgba(15, 31, 37, 0.92)", b: "rgba(34, 211, 238, 0.25)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.35)", bt: "#04181e" },
-      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.25)", g2: "rgba(168, 85, 247, 0.17)", s1: "rgba(27, 11, 19, 0.92)", s2: "rgba(38, 16, 27, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.35)", bt: "#22050d" },
-      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.23)", g2: "rgba(20, 184, 166, 0.17)", s1: "rgba(20, 24, 13, 0.92)", s2: "rgba(29, 34, 19, 0.92)", b: "rgba(132, 204, 22, 0.24)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.33)", bt: "#101b03" },
-      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.26)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(11, 17, 34, 0.92)", s2: "rgba(16, 25, 48, 0.92)", b: "rgba(59, 130, 246, 0.26)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.36)", bt: "#061129" },
-      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.92)", s2: "rgba(21, 28, 44, 0.92)", b: "rgba(52, 211, 153, 0.26)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.35)", bt: "#04140f" }
+      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(6, 182, 212, 0.16)", s1: "rgba(12, 20, 19, 0.92)", s2: "rgba(18, 30, 28, 0.92)", b: "rgba(52, 211, 153, 0.25)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.35)", bt: "#04130e" },
+      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.24)", g2: "rgba(139, 92, 246, 0.18)", s1: "rgba(20, 14, 30, 0.92)", s2: "rgba(30, 21, 44, 0.92)", b: "rgba(244, 114, 182, 0.26)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.36)", bt: "#190612" },
+      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.22)", g2: "rgba(244, 63, 94, 0.18)", s1: "rgba(13, 18, 34, 0.92)", s2: "rgba(20, 27, 48, 0.92)", b: "rgba(56, 189, 248, 0.26)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.35)", bt: "#05121d" },
+      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.22)", g2: "rgba(234, 88, 12, 0.16)", s1: "rgba(24, 19, 10, 0.92)", s2: "rgba(34, 27, 14, 0.92)", b: "rgba(251, 191, 36, 0.25)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.34)", bt: "#1d1202" },
+      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.24)", g2: "rgba(217, 70, 239, 0.16)", s1: "rgba(18, 12, 30, 0.92)", s2: "rgba(27, 19, 44, 0.92)", b: "rgba(192, 132, 252, 0.26)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.36)", bt: "#150624" },
+      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.22)", g2: "rgba(45, 212, 191, 0.16)", s1: "rgba(10, 21, 34, 0.92)", s2: "rgba(15, 31, 48, 0.92)", b: "rgba(56, 189, 248, 0.24)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.34)", bt: "#041622" },
+      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.22)", g2: "rgba(249, 115, 22, 0.16)", s1: "rgba(28, 11, 14, 0.92)", s2: "rgba(38, 16, 20, 0.92)", b: "rgba(248, 113, 113, 0.25)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.35)", bt: "#210508" },
+      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.22)", g2: "rgba(16, 185, 129, 0.16)", s1: "rgba(18, 24, 10, 0.92)", s2: "rgba(26, 34, 15, 0.92)", b: "rgba(163, 230, 53, 0.25)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.34)", bt: "#121d03" },
+      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.22)", g2: "rgba(251, 191, 36, 0.16)", s1: "rgba(27, 13, 17, 0.92)", s2: "rgba(37, 19, 24, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.34)", bt: "#22060c" },
+      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.22)", g2: "rgba(59, 130, 246, 0.16)", s1: "rgba(10, 23, 21, 0.92)", s2: "rgba(15, 33, 30, 0.92)", b: "rgba(45, 212, 191, 0.25)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.34)", bt: "#041916" },
+      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.24)", g2: "rgba(236, 72, 153, 0.16)", s1: "rgba(14, 14, 34, 0.92)", s2: "rgba(21, 21, 48, 0.92)", b: "rgba(129, 140, 248, 0.26)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.35)", bt: "#0b0b24" },
+      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.24)", g2: "rgba(250, 204, 21, 0.15)", s1: "rgba(28, 15, 8, 0.92)", s2: "rgba(38, 22, 12, 0.92)", b: "rgba(251, 146, 60, 0.26)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.36)", bt: "#210d02" },
+      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.20)", g2: "rgba(125, 211, 252, 0.16)", s1: "rgba(12, 24, 19, 0.92)", s2: "rgba(18, 34, 28, 0.92)", b: "rgba(110, 231, 183, 0.24)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.33)", bt: "#051911" },
+      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.23)", g2: "rgba(244, 63, 94, 0.17)", s1: "rgba(28, 11, 25, 0.92)", s2: "rgba(39, 16, 35, 0.92)", b: "rgba(232, 121, 249, 0.26)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.35)", bt: "#21051e" },
+      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.22)", g2: "rgba(167, 139, 250, 0.16)", s1: "rgba(12, 22, 32, 0.92)", s2: "rgba(18, 31, 45, 0.92)", b: "rgba(125, 211, 252, 0.25)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.34)", bt: "#041420" },
+      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.22)", g2: "rgba(99, 102, 241, 0.17)", s1: "rgba(22, 11, 25, 0.92)", s2: "rgba(31, 16, 35, 0.92)", b: "rgba(217, 70, 239, 0.25)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.35)", bt: "#1c0420" },
+      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.20)", g2: "rgba(249, 115, 22, 0.16)", s1: "rgba(25, 19, 10, 0.92)", s2: "rgba(35, 27, 15, 0.92)", b: "rgba(250, 204, 21, 0.24)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.33)", bt: "#1c1402" },
+      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.24)", g2: "rgba(16, 185, 129, 0.16)", s1: "rgba(10, 22, 27, 0.92)", s2: "rgba(15, 32, 39, 0.92)", b: "rgba(34, 211, 238, 0.26)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.36)", bt: "#03181e" },
+      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.21)", g2: "rgba(192, 132, 252, 0.16)", s1: "rgba(25, 14, 22, 0.92)", s2: "rgba(35, 20, 31, 0.92)", b: "rgba(244, 114, 182, 0.25)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.34)", bt: "#200718" },
+      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.22)", g2: "rgba(163, 230, 53, 0.15)", s1: "rgba(11, 22, 15, 0.92)", s2: "rgba(17, 32, 22, 0.92)", b: "rgba(74, 222, 128, 0.25)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.35)", bt: "#04190c" },
+      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.24)", g2: "rgba(168, 85, 247, 0.16)", s1: "rgba(12, 17, 34, 0.92)", s2: "rgba(18, 25, 48, 0.92)", b: "rgba(96, 165, 250, 0.26)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.36)", bt: "#061126" },
+      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.22)", g2: "rgba(245, 158, 11, 0.15)", s1: "rgba(26, 11, 18, 0.92)", s2: "rgba(37, 16, 26, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.35)", bt: "#20040d" },
+      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.23)", g2: "rgba(34, 211, 238, 0.15)", s1: "rgba(16, 24, 11, 0.92)", s2: "rgba(24, 34, 16, 0.92)", b: "rgba(190, 242, 100, 0.25)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.34)", bt: "#131e03" },
+      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.24)", g2: "rgba(56, 189, 248, 0.16)", s1: "rgba(17, 12, 33, 0.92)", s2: "rgba(25, 18, 46, 0.92)", b: "rgba(167, 139, 250, 0.26)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.36)", bt: "#130729" },
+      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.22)", g2: "rgba(236, 72, 153, 0.16)", s1: "rgba(28, 15, 12, 0.92)", s2: "rgba(38, 21, 17, 0.92)", b: "rgba(253, 186, 116, 0.25)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.34)", bt: "#210e05" },
+      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.22)", g2: "rgba(99, 102, 241, 0.16)", s1: "rgba(10, 21, 26, 0.92)", s2: "rgba(15, 31, 37, 0.92)", b: "rgba(34, 211, 238, 0.25)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.35)", bt: "#04181e" },
+      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.23)", g2: "rgba(168, 85, 247, 0.15)", s1: "rgba(27, 11, 19, 0.92)", s2: "rgba(38, 16, 27, 0.92)", b: "rgba(251, 113, 133, 0.25)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.35)", bt: "#22050d" },
+      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.21)", g2: "rgba(20, 184, 166, 0.15)", s1: "rgba(20, 24, 13, 0.92)", s2: "rgba(29, 34, 19, 0.92)", b: "rgba(132, 204, 22, 0.24)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.33)", bt: "#101b03" },
+      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.24)", g2: "rgba(34, 211, 238, 0.16)", s1: "rgba(11, 17, 34, 0.92)", s2: "rgba(16, 25, 48, 0.92)", b: "rgba(59, 130, 246, 0.26)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.36)", bt: "#061129" },
+      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.20)", g2: "rgba(236, 72, 153, 0.20)", s1: "rgba(14, 19, 31, 0.92)", s2: "rgba(21, 28, 44, 0.92)", b: "rgba(52, 211, 153, 0.26)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.35)", bt: "#04140f" }
     ];
 
     const root = document.documentElement;
+    const bgVideo = document.getElementById("bgVideo");
     const welcomeScreen = document.getElementById("welcomeScreen");
     const dashboardScreen = document.getElementById("dashboardScreen");
     const thirdScreen = document.getElementById("thirdScreen");
@@ -921,6 +881,34 @@
     const themeMenuBox = document.getElementById("themeMenuBox");
     const themeSelect = document.getElementById("themeSelect");
     const randomThemeBtn = document.getElementById("randomThemeBtn");
+
+    function ensureBgVideoPlaying() {
+      if (!bgVideo) return;
+      bgVideo.muted = true;
+      bgVideo.defaultMuted = true;
+      bgVideo.loop = true;
+      if (bgVideo.paused) {
+        bgVideo.play().catch(() => {});
+      }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && document.body.classList.contains("panel-active")) {
+        ensureBgVideoPlaying();
+      }
+    });
+
+    if (bgVideo) {
+      bgVideo.addEventListener("pause", () => {
+        if (document.body.classList.contains("panel-active")) {
+          ensureBgVideoPlaying();
+        }
+      });
+      bgVideo.addEventListener("ended", () => {
+        bgVideo.currentTime = 0;
+        ensureBgVideoPlaying();
+      });
+    }
 
     let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
     if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
@@ -960,18 +948,21 @@
       thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
       document.body.classList.add("panel-active");
+      ensureBgVideoPlaying();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     openThirdScreenBtn.addEventListener("click", () => {
       dashboardScreen.classList.add("hidden");
       thirdScreen.classList.remove("hidden");
+      ensureBgVideoPlaying();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     backFromThirdBtn.addEventListener("click", () => {
       thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
+      ensureBgVideoPlaying();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
