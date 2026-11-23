@@ -338,8 +338,8 @@
     }
 
     .avatar-ring {
-      width: 90px;
-      height: 90px;
+      width: 96px;
+      height: 96px;
       margin: 0 auto 12px;
       padding: 3px;
       border-radius: 50%;
@@ -352,12 +352,21 @@
       height: 100%;
       border-radius: 50%;
       background: var(--bg-main);
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 32px;
       font-weight: 800;
       color: var(--text);
+    }
+
+    .avatar-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
     }
 
     .brand-title {
@@ -503,29 +512,38 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
-    .links-stack {
-      display: flex;
-      flex-direction: column;
+    /* توزيع اللينكات كأعمدة/شبكة مع الحفاظ على شكل كل لينك */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin-top: 12px;
     }
 
-    .link-row {
+    @media (min-width: 640px) {
+      .links-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .link-card {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      text-align: center;
+      gap: 10px;
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 14px 10px;
     }
 
-    .link-left {
+    .link-card-info {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
-      min-width: 0;
+      gap: 4px;
     }
 
     .brand-icon {
@@ -571,24 +589,25 @@
     }
 
     .link-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .link-sub {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
     }
 
     .open-pill {
       display: inline-block;
+      width: 100%;
       text-decoration: none;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       color: var(--btn-text);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
-      padding: 10px 16px;
+      padding: 9px 12px;
       border-radius: 12px;
       flex-shrink: 0;
       transition: transform 0.15s ease, filter 0.15s ease;
@@ -778,7 +797,9 @@
 
       <header class="hero">
         <div class="avatar-ring">
-          <div class="avatar-inner">A</div>
+          <div class="avatar-inner">
+            <img src="./avatar.jpg" alt="Abdelrahman" class="avatar-photo" />
+          </div>
         </div>
         <div class="brand-title">Abdelrahman <span>|</span> عبدالرحمن</div>
         <div class="brand-sub">لوحة الوصول السريع ومعلومات التواصل</div>
@@ -834,7 +855,7 @@
       </section>
     </main>
 
-    <!-- الواجهة 3: شاشة اللينكات السريعة مع أشكال المواقع -->
+    <!-- الواجهة 3: شاشة اللينكات السريعة بتوزيع أعمدة/شبكة مع الحفاظ على شكل اللينكات -->
     <section id="thirdScreen" class="panel hidden">
       <div class="step-head">
         <div>
@@ -851,10 +872,10 @@
         <span class="active"></span>
       </div>
 
-      <div class="links-stack">
+      <div class="links-grid">
         <!-- 1. تيك توك -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-tiktok" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M14.5 3.5V14.2a3.3 3.3 0 1 1-2.4-3.18V8.1a6.2 6.2 0 1 0 5.3 6.13V8.78a7.4 7.4 0 0 0 3.6 1.02V7.03a4.5 4.5 0 0 1-3.6-2.18 4.4 4.4 0 0 1-.6-1.35h-2.3Z" fill="#ff2a55"/>
@@ -862,51 +883,45 @@
                 <path d="M14 3.25v10.7a3.3 3.3 0 1 1-2.4-3.18V7.85a6.2 6.2 0 1 0 5.3 6.13V8.53a7.4 7.4 0 0 0 3.6 1.02V6.78a4.5 4.5 0 0 1-3.6-2.18 4.4 4.4 0 0 1-.6-1.35H14Z" fill="#ffffff"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">تيك توك</div>
-              <div class="link-sub">TikTok</div>
-            </div>
+            <div class="link-title">تيك توك</div>
+            <div class="link-sub">TikTok</div>
           </div>
           <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
         <!-- 2. واتس اب -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-whatsapp" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="9.5" fill="#25d366"/>
                 <path d="M16.4 14.3c-.2-.1-1.3-.65-1.5-.72-.2-.07-.35-.1-.5.1s-.57.72-.7.87c-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.1-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.06-.6.28-.2.22-.78.76-.78 1.85s.8 2.15.91 2.3c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.54.17 1.03.15 1.42.09.43-.06 1.3-.53 1.48-1.05.18-.52.18-.96.13-1.05-.05-.09-.18-.15-.4-.25Z" fill="#ffffff"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">واتس اب</div>
-              <div class="link-sub">WhatsApp</div>
-            </div>
+            <div class="link-title">واتس اب</div>
+            <div class="link-sub">WhatsApp</div>
           </div>
           <a class="open-pill" href="https://api.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
         <!-- 3. يوتيوب -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-youtube" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="#ff0000"/>
                 <path d="M10.2 9.2v5.6l4.9-2.8-4.9-2.8Z" fill="#ffffff"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">يوتيوب</div>
-              <div class="link-sub">YouTube</div>
-            </div>
+            <div class="link-title">يوتيوب</div>
+            <div class="link-sub">YouTube</div>
           </div>
           <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
         <!-- 4. جوجل -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-google" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M21.35 12.23c0-.66-.06-1.3-.17-1.91H12v3.62h5.24a4.48 4.48 0 0 1-1.94 2.94v2.44h3.14c1.84-1.69 2.91-4.18 2.91-7.09Z" fill="#4285f4"/>
@@ -915,17 +930,15 @@
                 <path d="M12 6.12c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.82 3.22 14.62 2.25 12 2.25a9.75 9.75 0 0 0-8.7 5.37l3.24 2.52c.77-2.31 2.92-4.02 5.46-4.02Z" fill="#ea4335"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">جوجل</div>
-              <div class="link-sub">Google</div>
-            </div>
+            <div class="link-title">جوجل</div>
+            <div class="link-sub">Google</div>
           </div>
           <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
         <!-- 5. انستاجرام -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-instagram" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <rect x="4" y="4" width="16" height="16" rx="4.5" stroke="#ffffff" stroke-width="2"/>
@@ -933,17 +946,15 @@
                 <circle cx="16.8" cy="7.2" r="1.2" fill="#ffffff"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">انستاجرام</div>
-              <div class="link-sub">Instagram</div>
-            </div>
+            <div class="link-title">انستاجرام</div>
+            <div class="link-sub">Instagram</div>
           </div>
           <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
         <!-- 6. جيميناى -->
-        <div class="link-row">
-          <div class="link-left">
+        <div class="link-card">
+          <div class="link-card-info">
             <div class="brand-icon icon-gemini" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <defs>
@@ -956,10 +967,8 @@
                 <path d="M12 2.5C12 7.75 16.25 12 21.5 12C16.25 12 12 16.25 12 21.5C12 16.25 7.75 12 2.5 12C7.75 12 12 7.75 12 2.5Z" fill="url(#gemGrad)"/>
               </svg>
             </div>
-            <div>
-              <div class="link-title">جيميناى</div>
-              <div class="link-sub">Gemini</div>
-            </div>
+            <div class="link-title">جيميناى</div>
+            <div class="link-sub">Gemini</div>
           </div>
           <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
