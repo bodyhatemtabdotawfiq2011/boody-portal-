@@ -384,7 +384,56 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 14px;
+      padding: 12px 14px;
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand-icon svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .icon-tiktok {
+      background: #0d0f14;
+    }
+
+    .icon-whatsapp {
+      background: #12281e;
+    }
+
+    .icon-youtube {
+      background: #290e10;
+    }
+
+    .icon-google {
+      background: #161d2b;
+    }
+
+    .icon-instagram {
+      background: linear-gradient(135deg, #40184a, #7c1d38, #7c3512);
+    }
+
+    .icon-gemini {
+      background: #11182c;
     }
 
     .link-title {
@@ -592,7 +641,7 @@
       </section>
     </main>
 
-    <!-- الواجهة 3: شاشة اللينكات السريعة -->
+    <!-- الواجهة 3: شاشة اللينكات السريعة مع أشكال المواقع -->
     <section id="thirdScreen" class="panel hidden">
       <div class="step-head">
         <div>
@@ -610,50 +659,114 @@
       </div>
 
       <div class="links-stack">
+        <!-- 1. تيك توك -->
         <div class="link-row">
-          <div>
-            <div class="link-title">تيك توك</div>
-            <div class="link-sub">TikTok</div>
+          <div class="link-left">
+            <div class="brand-icon icon-tiktok" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.5 3.5V14.2a3.3 3.3 0 1 1-2.4-3.18V8.1a6.2 6.2 0 1 0 5.3 6.13V8.78a7.4 7.4 0 0 0 3.6 1.02V7.03a4.5 4.5 0 0 1-3.6-2.18 4.4 4.4 0 0 1-.6-1.35h-2.3Z" fill="#ff2a55"/>
+                <path d="M13.5 3v10.7a3.3 3.3 0 1 1-2.4-3.18V7.6a6.2 6.2 0 1 0 5.3 6.13V8.28a7.4 7.4 0 0 0 3.6 1.02V6.53a4.5 4.5 0 0 1-3.6-2.18A4.4 4.4 0 0 1 15.8 3h-2.3Z" fill="#25f4ee"/>
+                <path d="M14 3.25v10.7a3.3 3.3 0 1 1-2.4-3.18V7.85a6.2 6.2 0 1 0 5.3 6.13V8.53a7.4 7.4 0 0 0 3.6 1.02V6.78a4.5 4.5 0 0 1-3.6-2.18 4.4 4.4 0 0 1-.6-1.35H14Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">تيك توك</div>
+              <div class="link-sub">TikTok</div>
+            </div>
           </div>
           <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
+        <!-- 2. واتس اب -->
         <div class="link-row">
-          <div>
-            <div class="link-title">واتس اب</div>
-            <div class="link-sub">WhatsApp</div>
+          <div class="link-left">
+            <div class="brand-icon icon-whatsapp" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9.5" fill="#25d366"/>
+                <path d="M16.4 14.3c-.2-.1-1.3-.65-1.5-.72-.2-.07-.35-.1-.5.1s-.57.72-.7.87c-.13.15-.26.17-.48.06-.22-.11-.93-.34-1.77-1.1-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.64-.18-.43-.36-.37-.5-.38h-.42c-.15 0-.39.06-.6.28-.2.22-.78.76-.78 1.85s.8 2.15.91 2.3c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.54.17 1.03.15 1.42.09.43-.06 1.3-.53 1.48-1.05.18-.52.18-.96.13-1.05-.05-.09-.18-.15-.4-.25Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">واتس اب</div>
+              <div class="link-sub">WhatsApp</div>
+            </div>
           </div>
           <a class="open-pill" href="https://api.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
+        <!-- 3. يوتيوب -->
         <div class="link-row">
-          <div>
-            <div class="link-title">يوتيوب</div>
-            <div class="link-sub">YouTube</div>
+          <div class="link-left">
+            <div class="brand-icon icon-youtube" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="#ff0000"/>
+                <path d="M10.2 9.2v5.6l4.9-2.8-4.9-2.8Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">يوتيوب</div>
+              <div class="link-sub">YouTube</div>
+            </div>
           </div>
           <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
+        <!-- 4. جوجل -->
         <div class="link-row">
-          <div>
-            <div class="link-title">جوجل</div>
-            <div class="link-sub">Google</div>
+          <div class="link-left">
+            <div class="brand-icon icon-google" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M21.35 12.23c0-.66-.06-1.3-.17-1.91H12v3.62h5.24a4.48 4.48 0 0 1-1.94 2.94v2.44h3.14c1.84-1.69 2.91-4.18 2.91-7.09Z" fill="#4285f4"/>
+                <path d="M12 21.75c2.63 0 4.83-.87 6.44-2.36l-3.14-2.44c-.87.58-1.98.93-3.3.93-2.54 0-4.69-1.71-5.46-4.02H3.3v2.52a9.75 9.75 0 0 0 8.7 5.37Z" fill="#34a853"/>
+                <path d="M6.54 13.86a5.86 5.86 0 0 1 0-3.72V7.62H3.3a9.75 9.75 0 0 0 0 8.76l3.24-2.52Z" fill="#fbbc05"/>
+                <path d="M12 6.12c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.82 3.22 14.62 2.25 12 2.25a9.75 9.75 0 0 0-8.7 5.37l3.24 2.52c.77-2.31 2.92-4.02 5.46-4.02Z" fill="#ea4335"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">جوجل</div>
+              <div class="link-sub">Google</div>
+            </div>
           </div>
           <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
+        <!-- 5. انستاجرام -->
         <div class="link-row">
-          <div>
-            <div class="link-title">انستاجرام</div>
-            <div class="link-sub">Instagram</div>
+          <div class="link-left">
+            <div class="brand-icon icon-instagram" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="4" width="16" height="16" rx="4.5" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3.6" stroke="#ffffff" stroke-width="2"/>
+                <circle cx="16.8" cy="7.2" r="1.2" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">انستاجرام</div>
+              <div class="link-sub">Instagram</div>
+            </div>
           </div>
           <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
+        <!-- 6. جيميناى -->
         <div class="link-row">
-          <div>
-            <div class="link-title">جيميناى</div>
-            <div class="link-sub">Gemini</div>
+          <div class="link-left">
+            <div class="brand-icon icon-gemini" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <defs>
+                  <linearGradient id="gemGrad" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#4f8ef7"/>
+                    <stop offset="55%" stop-color="#a855f7"/>
+                    <stop offset="100%" stop-color="#ec4899"/>
+                  </linearGradient>
+                </defs>
+                <path d="M12 2.5C12 7.75 16.25 12 21.5 12C16.25 12 12 16.25 12 21.5C12 16.25 7.75 12 2.5 12C7.75 12 12 7.75 12 2.5Z" fill="url(#gemGrad)"/>
+              </svg>
+            </div>
+            <div>
+              <div class="link-title">جيميناى</div>
+              <div class="link-sub">Gemini</div>
+            </div>
           </div>
           <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
