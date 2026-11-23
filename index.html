@@ -41,7 +41,7 @@
       transition: background 0.35s ease, color 0.25s ease;
     }
 
-    body.dashboard-active {
+    body.panel-active {
       align-items: flex-start;
     }
 
@@ -50,7 +50,7 @@
       max-width: 470px;
     }
 
-    /* شاشة الترحيب متمركزة في منتصف الشاشة */
+    /* الواجهة 1: شاشة الترحيب */
     .welcome-card {
       width: 100%;
       background: var(--surface);
@@ -242,12 +242,12 @@
       color: var(--muted);
     }
 
-    /* بطاقتا المعلومات (الاسم الرسمي + سريع) */
+    /* بطاقتا المعلومات */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .stat-card {
@@ -270,51 +270,49 @@
       color: var(--muted);
     }
 
-    /* تمركز اللينكات السريعة في نص الصفحة */
-    .center-stage {
-      margin-top: 14px;
-      margin-bottom: 18px;
+    /* زر اللينكات السريعة في الواجهة 2 */
+    .quick-btn-box {
+      margin: 14px 0 18px;
     }
 
-    .quick-trigger-banner {
+    .quick-trigger-btn {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      background: var(--surface-2);
+      background: var(--surface);
       border: 1px solid var(--accent);
-      border-radius: 16px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
+      border-radius: 18px;
+      padding: 16px;
       color: var(--text);
       font-family: inherit;
       cursor: pointer;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
       transition: transform 0.15s ease, filter 0.15s ease;
     }
 
-    .quick-trigger-banner:hover {
+    .quick-trigger-btn:hover {
       filter: brightness(1.06);
       transform: translateY(-1px);
     }
 
-    .quick-trigger-main {
-      font-size: 15px;
+    .quick-trigger-title {
+      font-size: 16px;
       font-weight: 800;
     }
 
-    .quick-trigger-cta {
+    .quick-trigger-tag {
       font-size: 12px;
       font-weight: 800;
       color: var(--btn-text);
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      padding: 6px 12px;
-      border-radius: 10px;
+      padding: 7px 13px;
+      border-radius: 11px;
       flex-shrink: 0;
     }
 
-    /* الكروت الرئيسية */
+    /* الكروت والواجهات */
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -371,148 +369,15 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
-    .featured-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .empty-links-box {
       background: var(--surface-2);
-      border: 1px solid var(--accent);
+      border: 1px dashed var(--border);
       border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .featured-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .icon-badge {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: var(--btn-text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-
-    .featured-name {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 2px;
-    }
-
-    .featured-desc {
-      font-size: 12px;
+      padding: 24px 14px;
+      text-align: center;
       color: var(--muted);
-    }
-
-    .tag-selected {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .select-input {
-      width: 100%;
-      background: var(--surface-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px 14px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      outline: none;
-    }
-
-    .dual-actions {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 10px;
-    }
-
-    .btn-ghost {
-      background: var(--surface-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 13px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      border: none;
-      border-radius: 14px;
-      padding: 13px 16px;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--btn-text);
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 8px 20px var(--accent-glow);
-      cursor: pointer;
-    }
-
-    /* قائمة الروابط السريعة (بطاقات + زر فتح الرابط) */
-    .links-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .link-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px 14px;
-    }
-
-    .link-title {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 2px;
-    }
-
-    .link-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .open-pill {
-      border: none;
-      font-family: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: var(--btn-text);
       font-size: 13px;
-      font-weight: 800;
-      padding: 9px 14px;
-      border-radius: 12px;
-      flex-shrink: 0;
-      cursor: pointer;
-      transition: transform 0.15s ease, filter 0.15s ease;
-    }
-
-    .open-pill:hover {
-      filter: brightness(1.08);
-      transform: translateY(-1px);
+      font-weight: 700;
     }
 
     .back-btn {
@@ -610,7 +475,7 @@
 </head>
 <body>
   <div class="app">
-    <!-- واجهة الترحيب في منتصف الشاشة -->
+    <!-- الواجهة 1: الترحيب -->
     <section id="welcomeScreen" class="welcome-card">
       <h1 class="welcome-title">مرحبا بكم في موقعنا</h1>
       <div class="dots" aria-hidden="true">
@@ -624,7 +489,7 @@
       <button type="button" id="enterBtn" class="enter-btn">اضغط للدخول ←</button>
     </section>
 
-    <!-- لوحة الموقع الرئيسية -->
+    <!-- الواجهة 2: لوحة الموقع الرئيسية -->
     <main id="dashboardScreen" class="hidden">
       <div class="topbar">
         <div class="topbar-title">لوحة الموقع</div>
@@ -660,155 +525,13 @@
         </div>
       </section>
 
-      <!-- قسم اللينكات السريعة في منتصف الصفحة -->
-      <div id="quickCenterSection" class="center-stage">
-        <button type="button" id="quickBannerBtn" class="quick-trigger-banner">
-          <span class="quick-trigger-main">اللينكات السريعة</span>
-          <span class="quick-trigger-cta">اضغط هنا</span>
+      <div class="quick-btn-box">
+        <button type="button" id="openThirdScreenBtn" class="quick-trigger-btn">
+          <span class="quick-trigger-title">اللينكات السريعة</span>
+          <span class="quick-trigger-tag">اضغط هنا</span>
         </button>
-
-        <!-- شاشة الاختيار 01 -->
-        <section id="stepOneCard" class="panel">
-          <div class="step-head">
-            <div>
-              <div class="step-title">اختر من القائمة</div>
-              <div class="step-sub">حدد الخيار ثم اضغط على زر اختر للدخول</div>
-            </div>
-            <div class="step-badge">01</div>
-          </div>
-
-          <div class="progress-bar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span></span>
-          </div>
-
-          <div class="featured-box">
-            <div class="featured-right">
-              <div class="icon-badge">⚡</div>
-              <div>
-                <div class="featured-name">روابط سريعة</div>
-                <div class="featured-desc">متوفر العديد من اللينكات هنا</div>
-              </div>
-            </div>
-            <div class="tag-selected">محدد</div>
-          </div>
-
-          <select id="quickSelect" class="select-input" aria-label="اختر المنصة">
-            <option value="https://www.youtube.com">YouTube — فتح موقع يوتيوب</option>
-            <option value="https://www.tiktok.com">TikTok — فتح موقع تيك توك</option>
-            <option value="https://www.google.com">Google — بحث جوجل السريع</option>
-            <option value="https://gemini.google.com">Gemini — فتح مساعد جيميناي</option>
-            <option value="https://chatgpt.com">ChatGPT — فتح شات جي بي تي</option>
-            <option value="https://www.instagram.com">Instagram — فتح موقع إنستجرام</option>
-            <option value="https://www.facebook.com">Facebook — فتح موقع فيسبوك</option>
-            <option value="https://www.messenger.com">Messenger — فتح ماسنجر</option>
-            <option value="https://web.whatsapp.com">WhatsApp — فتح واتساب ويب</option>
-          </select>
-
-          <div class="dual-actions">
-            <button type="button" id="backToWelcomeBtn" class="btn-ghost">الترحيب</button>
-            <button type="button" id="chooseGoBtn" class="btn-primary">اختر ←</button>
-          </div>
-        </section>
-
-        <!-- شاشة اللينكات الكاملة 02 (تظهر فقط بعد الضغط على اللينكات السريعة) -->
-        <section id="stepTwoCard" class="panel hidden">
-          <div class="step-head">
-            <div>
-              <div class="step-title">روابط سريعة</div>
-              <div class="step-sub">متوفر العديد من اللينكات هنا</div>
-            </div>
-            <div class="step-badge">02</div>
-          </div>
-
-          <div class="progress-bar">
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-            <span class="active"></span>
-          </div>
-
-          <div class="links-stack">
-            <div class="link-row">
-              <div>
-                <div class="link-title">YouTube</div>
-                <div class="link-sub">فتح موقع يوتيوب</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.youtube.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">TikTok</div>
-                <div class="link-sub">فتح موقع تيك توك</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.tiktok.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">Google</div>
-                <div class="link-sub">بحث جوجل السريع</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.google.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">Gemini</div>
-                <div class="link-sub">فتح مساعد جيميناي</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://gemini.google.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">ChatGPT</div>
-                <div class="link-sub">فتح شات جي بي تي</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://chatgpt.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">Instagram</div>
-                <div class="link-sub">فتح موقع إنستجرام</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.instagram.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">Facebook</div>
-                <div class="link-sub">فتح موقع فيسبوك</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.facebook.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">Messenger</div>
-                <div class="link-sub">فتح ماسنجر</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://www.messenger.com">فتح الرابط</button>
-            </div>
-
-            <div class="link-row">
-              <div>
-                <div class="link-title">WhatsApp</div>
-                <div class="link-sub">فتح واتساب ويب</div>
-              </div>
-              <button type="button" class="open-pill" data-url="https://web.whatsapp.com">فتح الرابط</button>
-            </div>
-          </div>
-
-          <button type="button" id="backToChoiceBtn" class="back-btn">رجوع للاختيار</button>
-        </section>
       </div>
 
-      <!-- قسم التواصل المباشر -->
       <section class="panel">
         <div class="contact-head">
           <div class="contact-title">للتواصل معنا</div>
@@ -832,6 +555,30 @@
         </div>
       </section>
     </main>
+
+    <!-- الواجهة 3: شاشة اللينكات (تظهر فقط عند الضغط على زر اللينكات السريعة - اضغط هنا) -->
+    <section id="thirdScreen" class="panel hidden">
+      <div class="step-head">
+        <div>
+          <div class="step-title">اللينكات السريعة</div>
+          <div class="step-sub">متوفر العديد من اللينكات هنا</div>
+        </div>
+        <div class="step-badge">03</div>
+      </div>
+
+      <div class="progress-bar">
+        <span class="active"></span>
+        <span class="active"></span>
+        <span class="active"></span>
+        <span class="active"></span>
+      </div>
+
+      <div class="empty-links-box">
+        لا توجد لينكات مضافة حالياً
+      </div>
+
+      <button type="button" id="backFromThirdBtn" class="back-btn">رجوع</button>
+    </section>
   </div>
 
   <script>
@@ -871,41 +618,17 @@
     const root = document.documentElement;
     const welcomeScreen = document.getElementById("welcomeScreen");
     const dashboardScreen = document.getElementById("dashboardScreen");
+    const thirdScreen = document.getElementById("thirdScreen");
+
     const enterBtn = document.getElementById("enterBtn");
-    const backToWelcomeBtn = document.getElementById("backToWelcomeBtn");
+    const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
+    const backFromThirdBtn = document.getElementById("backFromThirdBtn");
 
     const cycleThemeBtn = document.getElementById("cycleThemeBtn");
     const openThemesMenuBtn = document.getElementById("openThemesMenuBtn");
     const themeMenuBox = document.getElementById("themeMenuBox");
     const themeSelect = document.getElementById("themeSelect");
     const randomThemeBtn = document.getElementById("randomThemeBtn");
-
-    const quickBannerBtn = document.getElementById("quickBannerBtn");
-    const stepOneCard = document.getElementById("stepOneCard");
-    const stepTwoCard = document.getElementById("stepTwoCard");
-    const quickSelect = document.getElementById("quickSelect");
-    const chooseGoBtn = document.getElementById("chooseGoBtn");
-    const backToChoiceBtn = document.getElementById("backToChoiceBtn");
-
-    function launchLink(url) {
-      if (!url) return;
-      const win = window.open(url, "_blank", "noopener,noreferrer");
-      if (!win) {
-        window.location.href = url;
-      }
-    }
-
-    function openAllLinksScreen() {
-      stepOneCard.classList.add("hidden");
-      stepTwoCard.classList.remove("hidden");
-      stepTwoCard.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-
-    function openChoiceScreen() {
-      stepTwoCard.classList.add("hidden");
-      stepOneCard.classList.remove("hidden");
-      stepOneCard.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
 
     let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
     if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
@@ -942,17 +665,21 @@
 
     enterBtn.addEventListener("click", () => {
       welcomeScreen.classList.add("hidden");
+      thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
-      document.body.classList.add("dashboard-active");
-      stepTwoCard.classList.add("hidden");
-      stepOneCard.classList.remove("hidden");
+      document.body.classList.add("panel-active");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    backToWelcomeBtn.addEventListener("click", () => {
+    openThirdScreenBtn.addEventListener("click", () => {
       dashboardScreen.classList.add("hidden");
-      welcomeScreen.classList.remove("hidden");
-      document.body.classList.remove("dashboard-active");
+      thirdScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    backFromThirdBtn.addEventListener("click", () => {
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
@@ -973,20 +700,6 @@
       let next = Math.floor(Math.random() * THEMES_30.length);
       if (next === currentThemeIndex) next = (next + 1) % THEMES_30.length;
       applyTheme(next);
-    });
-
-    quickBannerBtn.addEventListener("click", openAllLinksScreen);
-
-    chooseGoBtn.addEventListener("click", () => {
-      launchLink(quickSelect.value);
-    });
-
-    backToChoiceBtn.addEventListener("click", openChoiceScreen);
-
-    document.querySelectorAll(".open-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        launchLink(btn.getAttribute("data-url"));
-      });
     });
 
     document.querySelectorAll(".copy-btn").forEach((btn) => {
