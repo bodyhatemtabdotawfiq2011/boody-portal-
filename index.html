@@ -9,8 +9,8 @@
       --bg-main: #060b0a;
       --bg-grad-1: rgba(16, 185, 129, 0.22);
       --bg-grad-2: rgba(6, 182, 212, 0.16);
-      --surface: rgba(12, 20, 19, 0.74);
-      --surface-2: rgba(18, 30, 28, 0.80);
+      --surface: rgba(12, 20, 19, 0.72);
+      --surface-2: rgba(18, 30, 28, 0.78);
       --border: rgba(52, 211, 153, 0.28);
       --accent: #10b981;
       --accent-2: #06b6d4;
@@ -28,7 +28,7 @@
 
     html, body {
       min-height: 100vh;
-      background: #070503;
+      background: transparent;
     }
 
     body {
@@ -46,6 +46,7 @@
       align-items: flex-start;
     }
 
+    /* خلفية الفيديو الموحدة */
     #bgVideo {
       position: fixed;
       top: 0;
@@ -77,6 +78,7 @@
       max-width: 470px;
     }
 
+    /* واجهة الدخول */
     .auth-card {
       width: 100%;
       background: var(--surface);
@@ -215,12 +217,11 @@
     }
 
     .auth-msg {
-      min-height: 22px;
+      min-height: 20px;
       font-size: 13px;
       font-weight: 700;
       text-align: center;
       margin-top: 2px;
-      line-height: 1.5;
     }
 
     .auth-msg.error {
@@ -243,6 +244,7 @@
       text-align: right;
     }
 
+    /* شريط لوحة الموقع و ميكس الألوان */
     .topbar {
       display: flex;
       align-items: center;
@@ -316,6 +318,7 @@
       outline: none;
     }
 
+    /* الهيدر والشعار الدائري */
     .hero {
       text-align: center;
       margin-bottom: 16px;
@@ -371,6 +374,7 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
     }
 
+    /* بطاقتا المعلومات */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -399,6 +403,7 @@
       color: var(--muted);
     }
 
+    /* زر اللينكات السريعة في الواجهة 2 */
     .quick-btn-box {
       margin: 14px 0 18px;
     }
@@ -441,6 +446,7 @@
       flex-shrink: 0;
     }
 
+    /* الكروت والواجهات */
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -449,19 +455,6 @@
       margin-bottom: 14px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
       backdrop-filter: blur(6px);
-    }
-
-    .cloud-banner {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 14px;
-      margin-bottom: 12px;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text);
-      text-align: center;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
     }
 
     .step-head {
@@ -511,6 +504,7 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
+    /* توزيع اللينكات كأعمدة/شبكة */
     .links-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -613,6 +607,7 @@
       cursor: pointer;
     }
 
+    /* قسم التواصل المباشر */
     .contact-head {
       display: flex;
       align-items: center;
@@ -687,15 +682,17 @@
     }
 
     .hidden {
-      display: none !important;
+      display: none;
     }
   </style>
 </head>
 <body>
+  <!-- عنصر فيديو واحد يبدل تلقائياً بين auth-bg.mp4 و bg.mp4 -->
   <video id="bgVideo" src="auth-bg.mp4" autoplay muted loop playsinline preload="auto"></video>
   <div class="video-bg-scrim" aria-hidden="true"></div>
 
   <div class="app">
+    <!-- واجهة الدخول -->
     <section id="welcomeScreen" class="auth-card">
       <div class="auth-theme-bar">
         <span id="authThemeName" class="auth-theme-label">ميكس 1/30</span>
@@ -723,42 +720,42 @@
       <form id="registerForm" class="auth-form" autocomplete="off">
         <div class="field-group">
           <label for="regName" class="field-label">الاسم</label>
-          <input id="regName" type="text" class="field-input" placeholder="اكتب اسمك" />
+          <input id="regName" type="text" class="field-input" placeholder="اكتب اسمك" required />
         </div>
         <div class="field-group">
           <label for="regPhone" class="field-label">رقم التليفون</label>
-          <input id="regPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" />
+          <input id="regPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
         </div>
         <div class="field-group">
           <label for="regPassword" class="field-label">كلمة السر</label>
-          <input id="regPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة سر قوية" />
+          <input id="regPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة سر قوية" required />
         </div>
         <div class="field-group">
           <label for="regSitePassword" class="field-label">باسورد الموقع</label>
-          <input id="regSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" />
+          <input id="regSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" required />
         </div>
-        <button type="submit" id="registerSubmitBtn" class="auth-submit-btn">إنشاء حساب والدخول ←</button>
+        <button type="submit" class="auth-submit-btn">إنشاء حساب والدخول ←</button>
         <div id="registerMsg" class="auth-msg" aria-live="polite"></div>
       </form>
 
       <form id="loginForm" class="auth-form hidden" autocomplete="off">
         <div class="field-group">
           <label for="loginName" class="field-label">الاسم</label>
-          <input id="loginName" type="text" class="field-input" placeholder="اكتب اسمك" />
+          <input id="loginName" type="text" class="field-input" placeholder="اكتب اسمك" required />
         </div>
         <div class="field-group">
           <label for="loginPhone" class="field-label">رقم التليفون</label>
-          <input id="loginPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" />
+          <input id="loginPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
         </div>
         <div class="field-group">
           <label for="loginPassword" class="field-label">كلمة السر</label>
-          <input id="loginPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة السر" />
+          <input id="loginPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة السر" required />
         </div>
         <div class="field-group">
           <label for="loginSitePassword" class="field-label">باسورد الموقع</label>
-          <input id="loginSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" />
+          <input id="loginSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" required />
         </div>
-        <button type="submit" id="loginSubmitBtn" class="auth-submit-btn">تسجيل الدخول ←</button>
+        <button type="submit" class="auth-submit-btn">تسجيل الدخول ←</button>
         <div id="loginMsg" class="auth-msg" aria-live="polite"></div>
       </form>
 
@@ -767,6 +764,7 @@
       </p>
     </section>
 
+    <!-- الواجهة 2: لوحة الموقع الرئيسية -->
     <main id="dashboardScreen" class="hidden">
       <div class="topbar">
         <div class="topbar-title">لوحة الموقع</div>
@@ -843,9 +841,8 @@
       </section>
     </main>
 
+    <!-- الواجهة 3: شاشة اللينكات السريعة -->
     <section id="thirdScreen" class="panel hidden">
-      <div class="cloud-banner">☁️ اضغط على أي لينك لفتحه دون تحميل التطبيق</div>
-
       <div class="step-head">
         <div>
           <div class="step-title">اللينكات السريعة</div>
@@ -962,381 +959,383 @@
   </div>
 
   <script>
-    (function () {
-      const THEMES_30 = [
-        { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.24)", g2: "rgba(6, 182, 212, 0.18)", s1: "rgba(12, 20, 19, 0.74)", s2: "rgba(18, 30, 28, 0.80)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.36)", bt: "#04130e" },
-        { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.26)", g2: "rgba(139, 92, 246, 0.20)", s1: "rgba(20, 14, 30, 0.74)", s2: "rgba(30, 21, 44, 0.80)", b: "rgba(244, 114, 182, 0.28)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.38)", bt: "#190612" },
-        { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.24)", g2: "rgba(244, 63, 94, 0.20)", s1: "rgba(13, 18, 34, 0.74)", s2: "rgba(20, 27, 48, 0.80)", b: "rgba(56, 189, 248, 0.28)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.36)", bt: "#05121d" },
-        { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.24)", g2: "rgba(234, 88, 12, 0.18)", s1: "rgba(24, 19, 10, 0.74)", s2: "rgba(34, 27, 14, 0.80)", b: "rgba(251, 191, 36, 0.28)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.36)", bt: "#1d1202" },
-        { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.26)", g2: "rgba(217, 70, 239, 0.18)", s1: "rgba(18, 12, 30, 0.74)", s2: "rgba(27, 19, 44, 0.80)", b: "rgba(192, 132, 252, 0.28)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.38)", bt: "#150624" },
-        { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.24)", g2: "rgba(45, 212, 191, 0.18)", s1: "rgba(10, 21, 34, 0.74)", s2: "rgba(15, 31, 48, 0.80)", b: "rgba(56, 189, 248, 0.26)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.36)", bt: "#041622" },
-        { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.24)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(28, 11, 14, 0.74)", s2: "rgba(38, 16, 20, 0.80)", b: "rgba(248, 113, 113, 0.28)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.36)", bt: "#210508" },
-        { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.24)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(18, 24, 10, 0.74)", s2: "rgba(26, 34, 15, 0.80)", b: "rgba(163, 230, 53, 0.28)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.36)", bt: "#121d03" },
-        { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.24)", g2: "rgba(251, 191, 36, 0.18)", s1: "rgba(27, 13, 17, 0.74)", s2: "rgba(37, 19, 24, 0.80)", b: "rgba(251, 113, 133, 0.28)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.36)", bt: "#22060c" },
-        { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.24)", g2: "rgba(59, 130, 246, 0.18)", s1: "rgba(10, 23, 21, 0.74)", s2: "rgba(15, 33, 30, 0.80)", b: "rgba(45, 212, 191, 0.28)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.36)", bt: "#041916" },
-        { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.26)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(14, 14, 34, 0.74)", s2: "rgba(21, 21, 48, 0.80)", b: "rgba(129, 140, 248, 0.28)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.36)", bt: "#0b0b24" },
-        { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.26)", g2: "rgba(250, 204, 21, 0.18)", s1: "rgba(28, 15, 8, 0.74)", s2: "rgba(38, 22, 12, 0.80)", b: "rgba(251, 146, 60, 0.28)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.38)", bt: "#210d02" },
-        { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.22)", g2: "rgba(125, 211, 252, 0.18)", s1: "rgba(12, 24, 19, 0.74)", s2: "rgba(18, 34, 28, 0.80)", b: "rgba(110, 231, 183, 0.26)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.35)", bt: "#051911" },
-        { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.25)", g2: "rgba(244, 63, 94, 0.19)", s1: "rgba(28, 11, 25, 0.74)", s2: "rgba(39, 16, 35, 0.80)", b: "rgba(232, 121, 249, 0.28)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.36)", bt: "#21051e" },
-        { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.24)", g2: "rgba(167, 139, 250, 0.18)", s1: "rgba(12, 22, 32, 0.74)", s2: "rgba(18, 31, 45, 0.80)", b: "rgba(125, 211, 252, 0.28)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.36)", bt: "#041420" },
-        { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.24)", g2: "rgba(99, 102, 241, 0.19)", s1: "rgba(22, 11, 25, 0.74)", s2: "rgba(31, 16, 35, 0.80)", b: "rgba(217, 70, 239, 0.28)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.36)", bt: "#1c0420" },
-        { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.22)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(25, 19, 10, 0.74)", s2: "rgba(35, 27, 15, 0.80)", b: "rgba(250, 204, 21, 0.26)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.35)", bt: "#1c1402" },
-        { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.26)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(10, 22, 27, 0.74)", s2: "rgba(15, 32, 39, 0.80)", b: "rgba(34, 211, 238, 0.28)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.38)", bt: "#03181e" },
-        { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.23)", g2: "rgba(192, 132, 252, 0.18)", s1: "rgba(25, 14, 22, 0.74)", s2: "rgba(35, 20, 31, 0.80)", b: "rgba(244, 114, 182, 0.28)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.36)", bt: "#200718" },
-        { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.24)", g2: "rgba(163, 230, 53, 0.18)", s1: "rgba(11, 22, 15, 0.74)", s2: "rgba(17, 32, 22, 0.80)", b: "rgba(74, 222, 128, 0.28)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.36)", bt: "#04190c" },
-        { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.26)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(12, 17, 34, 0.74)", s2: "rgba(18, 25, 48, 0.80)", b: "rgba(96, 165, 250, 0.28)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.38)", bt: "#061126" },
-        { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.24)", g2: "rgba(245, 158, 11, 0.18)", s1: "rgba(26, 11, 18, 0.74)", s2: "rgba(37, 16, 26, 0.80)", b: "rgba(251, 113, 133, 0.28)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.36)", bt: "#20040d" },
-        { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.25)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(16, 24, 11, 0.74)", s2: "rgba(24, 34, 16, 0.80)", b: "rgba(190, 242, 100, 0.28)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.36)", bt: "#131e03" },
-        { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.26)", g2: "rgba(56, 189, 248, 0.18)", s1: "rgba(17, 12, 33, 0.74)", s2: "rgba(25, 18, 46, 0.80)", b: "rgba(167, 139, 250, 0.28)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.38)", bt: "#130729" },
-        { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.24)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(28, 15, 12, 0.74)", s2: "rgba(38, 21, 17, 0.80)", b: "rgba(253, 186, 116, 0.28)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.36)", bt: "#210e05" },
-        { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.24)", g2: "rgba(99, 102, 241, 0.18)", s1: "rgba(10, 21, 26, 0.74)", s2: "rgba(15, 31, 37, 0.80)", b: "rgba(34, 211, 238, 0.28)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.36)", bt: "#04181e" },
-        { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.25)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(27, 11, 19, 0.74)", s2: "rgba(38, 16, 27, 0.80)", b: "rgba(251, 113, 133, 0.28)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.36)", bt: "#22050d" },
-        { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.23)", g2: "rgba(20, 184, 166, 0.18)", s1: "rgba(20, 24, 13, 0.74)", s2: "rgba(29, 34, 19, 0.80)", b: "rgba(132, 204, 22, 0.26)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.35)", bt: "#101b03" },
-        { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.26)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(11, 17, 34, 0.74)", s2: "rgba(16, 25, 48, 0.80)", b: "rgba(59, 130, 246, 0.28)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.38)", bt: "#061129" },
-        { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.74)", s2: "rgba(21, 28, 44, 0.80)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.36)", bt: "#04140f" }
-      ];
+    const THEMES_30 = [
+      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.24)", g2: "rgba(6, 182, 212, 0.18)", s1: "rgba(12, 20, 19, 0.72)", s2: "rgba(18, 30, 28, 0.78)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.36)", bt: "#04130e" },
+      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.26)", g2: "rgba(139, 92, 246, 0.20)", s1: "rgba(20, 14, 30, 0.72)", s2: "rgba(30, 21, 44, 0.78)", b: "rgba(244, 114, 182, 0.28)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.38)", bt: "#190612" },
+      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.24)", g2: "rgba(244, 63, 94, 0.20)", s1: "rgba(13, 18, 34, 0.72)", s2: "rgba(20, 27, 48, 0.78)", b: "rgba(56, 189, 248, 0.28)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.36)", bt: "#05121d" },
+      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.24)", g2: "rgba(234, 88, 12, 0.18)", s1: "rgba(24, 19, 10, 0.72)", s2: "rgba(34, 27, 14, 0.78)", b: "rgba(251, 191, 36, 0.28)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.36)", bt: "#1d1202" },
+      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.26)", g2: "rgba(217, 70, 239, 0.18)", s1: "rgba(18, 12, 30, 0.72)", s2: "rgba(27, 19, 44, 0.78)", b: "rgba(192, 132, 252, 0.28)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.38)", bt: "#150624" },
+      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.24)", g2: "rgba(45, 212, 191, 0.18)", s1: "rgba(10, 21, 34, 0.72)", s2: "rgba(15, 31, 48, 0.78)", b: "rgba(56, 189, 248, 0.26)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.36)", bt: "#041622" },
+      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.24)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(28, 11, 14, 0.72)", s2: "rgba(38, 16, 20, 0.78)", b: "rgba(248, 113, 113, 0.28)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.36)", bt: "#210508" },
+      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.24)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(18, 24, 10, 0.72)", s2: "rgba(26, 34, 15, 0.78)", b: "rgba(163, 230, 53, 0.28)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.36)", bt: "#121d03" },
+      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.24)", g2: "rgba(251, 191, 36, 0.18)", s1: "rgba(27, 13, 17, 0.72)", s2: "rgba(37, 19, 24, 0.78)", b: "rgba(251, 113, 133, 0.28)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.36)", bt: "#22060c" },
+      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.24)", g2: "rgba(59, 130, 246, 0.18)", s1: "rgba(10, 23, 21, 0.72)", s2: "rgba(15, 33, 30, 0.78)", b: "rgba(45, 212, 191, 0.28)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.36)", bt: "#041916" },
+      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.26)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(14, 14, 34, 0.72)", s2: "rgba(21, 21, 48, 0.78)", b: "rgba(129, 140, 248, 0.28)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.36)", bt: "#0b0b24" },
+      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.26)", g2: "rgba(250, 204, 21, 0.18)", s1: "rgba(28, 15, 8, 0.72)", s2: "rgba(38, 22, 12, 0.78)", b: "rgba(251, 146, 60, 0.28)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.38)", bt: "#210d02" },
+      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.22)", g2: "rgba(125, 211, 252, 0.18)", s1: "rgba(12, 24, 19, 0.72)", s2: "rgba(18, 34, 28, 0.78)", b: "rgba(110, 231, 183, 0.26)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.35)", bt: "#051911" },
+      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.25)", g2: "rgba(244, 63, 94, 0.19)", s1: "rgba(28, 11, 25, 0.72)", s2: "rgba(39, 16, 35, 0.78)", b: "rgba(232, 121, 249, 0.28)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.36)", bt: "#21051e" },
+      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.24)", g2: "rgba(167, 139, 250, 0.18)", s1: "rgba(12, 22, 32, 0.72)", s2: "rgba(18, 31, 45, 0.78)", b: "rgba(125, 211, 252, 0.28)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.36)", bt: "#041420" },
+      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.24)", g2: "rgba(99, 102, 241, 0.19)", s1: "rgba(22, 11, 25, 0.72)", s2: "rgba(31, 16, 35, 0.78)", b: "rgba(217, 70, 239, 0.28)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.36)", bt: "#1c0420" },
+      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.22)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(25, 19, 10, 0.72)", s2: "rgba(35, 27, 15, 0.78)", b: "rgba(250, 204, 21, 0.26)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.35)", bt: "#1c1402" },
+      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.26)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(10, 22, 27, 0.72)", s2: "rgba(15, 32, 39, 0.78)", b: "rgba(34, 211, 238, 0.28)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.38)", bt: "#03181e" },
+      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.23)", g2: "rgba(192, 132, 252, 0.18)", s1: "rgba(25, 14, 22, 0.72)", s2: "rgba(35, 20, 31, 0.78)", b: "rgba(244, 114, 182, 0.28)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.36)", bt: "#200718" },
+      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.24)", g2: "rgba(163, 230, 53, 0.18)", s1: "rgba(11, 22, 15, 0.72)", s2: "rgba(17, 32, 22, 0.78)", b: "rgba(74, 222, 128, 0.28)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.36)", bt: "#04190c" },
+      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.26)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(12, 17, 34, 0.72)", s2: "rgba(18, 25, 48, 0.78)", b: "rgba(96, 165, 250, 0.28)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.38)", bt: "#061126" },
+      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.24)", g2: "rgba(245, 158, 11, 0.18)", s1: "rgba(26, 11, 18, 0.72)", s2: "rgba(37, 16, 26, 0.78)", b: "rgba(251, 113, 133, 0.28)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.36)", bt: "#20040d" },
+      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.25)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(16, 24, 11, 0.72)", s2: "rgba(24, 34, 16, 0.78)", b: "rgba(190, 242, 100, 0.28)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.36)", bt: "#131e03" },
+      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.26)", g2: "rgba(56, 189, 248, 0.18)", s1: "rgba(17, 12, 33, 0.72)", s2: "rgba(25, 18, 46, 0.78)", b: "rgba(167, 139, 250, 0.28)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.38)", bt: "#130729" },
+      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.24)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(28, 15, 12, 0.72)", s2: "rgba(38, 21, 17, 0.78)", b: "rgba(253, 186, 116, 0.28)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.36)", bt: "#210e05" },
+      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.24)", g2: "rgba(99, 102, 241, 0.18)", s1: "rgba(10, 21, 26, 0.72)", s2: "rgba(15, 31, 37, 0.78)", b: "rgba(34, 211, 238, 0.28)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.36)", bt: "#04181e" },
+      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.25)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(27, 11, 19, 0.72)", s2: "rgba(38, 16, 27, 0.78)", b: "rgba(251, 113, 133, 0.28)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.36)", bt: "#22050d" },
+      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.23)", g2: "rgba(20, 184, 166, 0.18)", s1: "rgba(20, 24, 13, 0.72)", s2: "rgba(29, 34, 19, 0.78)", b: "rgba(132, 204, 22, 0.26)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.35)", bt: "#101b03" },
+      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.26)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(11, 17, 34, 0.72)", s2: "rgba(16, 25, 48, 0.78)", b: "rgba(59, 130, 246, 0.28)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.38)", bt: "#061129" },
+      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.72)", s2: "rgba(21, 28, 44, 0.78)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.36)", bt: "#04140f" }
+    ];
 
-      const SITE_ACCESS_PASSWORD = "192.2.2.30";
-      const ACCOUNTS_STORAGE_KEY = "boodyPortalAccountsV2";
+    const SITE_ACCESS_PASSWORD = String.fromCharCode(49, 57, 50, 46, 50, 46, 50, 46, 51, 48);
+    const ACCOUNTS_STORAGE_KEY = "boodyPortalAccountsV1";
 
-      const root = document.documentElement;
-      const bgVideo = document.getElementById("bgVideo");
-      const welcomeScreen = document.getElementById("welcomeScreen");
-      const dashboardScreen = document.getElementById("dashboardScreen");
-      const thirdScreen = document.getElementById("thirdScreen");
+    const root = document.documentElement;
+    const bgVideo = document.getElementById("bgVideo");
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const dashboardScreen = document.getElementById("dashboardScreen");
+    const thirdScreen = document.getElementById("thirdScreen");
 
-      const authThemeName = document.getElementById("authThemeName");
-      const authCycleThemeBtn = document.getElementById("authCycleThemeBtn");
-      const authOpenThemesMenuBtn = document.getElementById("authOpenThemesMenuBtn");
-      const authThemeMenuBox = document.getElementById("authThemeMenuBox");
-      const authThemeSelect = document.getElementById("authThemeSelect");
-      const authRandomThemeBtn = document.getElementById("authRandomThemeBtn");
+    const authThemeName = document.getElementById("authThemeName");
+    const authCycleThemeBtn = document.getElementById("authCycleThemeBtn");
+    const authOpenThemesMenuBtn = document.getElementById("authOpenThemesMenuBtn");
+    const authThemeMenuBox = document.getElementById("authThemeMenuBox");
+    const authThemeSelect = document.getElementById("authThemeSelect");
+    const authRandomThemeBtn = document.getElementById("authRandomThemeBtn");
 
-      const tabRegisterBtn = document.getElementById("tabRegisterBtn");
-      const tabLoginBtn = document.getElementById("tabLoginBtn");
-      const registerForm = document.getElementById("registerForm");
-      const loginForm = document.getElementById("loginForm");
+    const tabRegisterBtn = document.getElementById("tabRegisterBtn");
+    const tabLoginBtn = document.getElementById("tabLoginBtn");
+    const registerForm = document.getElementById("registerForm");
+    const loginForm = document.getElementById("loginForm");
 
-      const regNameInput = document.getElementById("regName");
-      const regPhoneInput = document.getElementById("regPhone");
-      const regPasswordInput = document.getElementById("regPassword");
-      const regSitePasswordInput = document.getElementById("regSitePassword");
-      const registerMsg = document.getElementById("registerMsg");
+    const regNameInput = document.getElementById("regName");
+    const regPhoneInput = document.getElementById("regPhone");
+    const regPasswordInput = document.getElementById("regPassword");
+    const regSitePasswordInput = document.getElementById("regSitePassword");
+    const registerMsg = document.getElementById("registerMsg");
 
-      const loginNameInput = document.getElementById("loginName");
-      const loginPhoneInput = document.getElementById("loginPhone");
-      const loginPasswordInput = document.getElementById("loginPassword");
-      const loginSitePasswordInput = document.getElementById("loginSitePassword");
-      const loginMsg = document.getElementById("loginMsg");
+    const loginNameInput = document.getElementById("loginName");
+    const loginPhoneInput = document.getElementById("loginPhone");
+    const loginPasswordInput = document.getElementById("loginPassword");
+    const loginSitePasswordInput = document.getElementById("loginSitePassword");
+    const loginMsg = document.getElementById("loginMsg");
 
-      const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
-      const backFromThirdBtn = document.getElementById("backFromThirdBtn");
+    const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
+    const backFromThirdBtn = document.getElementById("backFromThirdBtn");
 
-      const cycleThemeBtn = document.getElementById("cycleThemeBtn");
-      const openThemesMenuBtn = document.getElementById("openThemesMenuBtn");
-      const themeMenuBox = document.getElementById("themeMenuBox");
-      const themeSelect = document.getElementById("themeSelect");
-      const randomThemeBtn = document.getElementById("randomThemeBtn");
+    const cycleThemeBtn = document.getElementById("cycleThemeBtn");
+    const openThemesMenuBtn = document.getElementById("openThemesMenuBtn");
+    const themeMenuBox = document.getElementById("themeMenuBox");
+    const themeSelect = document.getElementById("themeSelect");
+    const randomThemeBtn = document.getElementById("randomThemeBtn");
 
-      let activeVideoSrc = "auth-bg.mp4";
+    let activeVideoSrc = "auth-bg.mp4";
 
-      function ensureVideoPlaying() {
-        try {
-          if (!bgVideo) return;
-          bgVideo.muted = true;
-          bgVideo.defaultMuted = true;
-          bgVideo.loop = true;
-          if (bgVideo.ended) {
-            bgVideo.currentTime = 0;
-          }
-          if (bgVideo.paused) {
-            const playPromise = bgVideo.play();
-            if (playPromise && typeof playPromise.catch === "function") {
-              playPromise.catch(() => {});
-            }
-          }
-        } catch (_) {}
+    function ensureVideoPlaying() {
+      if (!bgVideo) return;
+      bgVideo.muted = true;
+      bgVideo.defaultMuted = true;
+      bgVideo.loop = true;
+      if (bgVideo.ended) {
+        try { bgVideo.currentTime = 0; } catch (_) {}
       }
-
-      function setBackgroundVideo(srcFile) {
-        try {
-          if (!bgVideo) return;
-          if (activeVideoSrc !== srcFile) {
-            activeVideoSrc = srcFile;
-            bgVideo.src = srcFile;
-            bgVideo.load();
-          }
-          ensureVideoPlaying();
-        } catch (_) {}
+      if (bgVideo.paused) {
+        bgVideo.play().catch(() => {});
       }
+    }
 
-      function normalizePhone(raw) {
-        return String(raw || "")
-          .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
-          .replace(/[^\d]/g, "")
-          .trim();
+    function setBackgroundVideo(srcFile) {
+      if (!bgVideo || activeVideoSrc === srcFile) {
+        ensureVideoPlaying();
+        return;
       }
+      activeVideoSrc = srcFile;
+      bgVideo.src = srcFile;
+      bgVideo.load();
+      bgVideo.play().catch(() => {});
+    }
 
-      function normalizeCode(raw) {
-        return String(raw || "")
-          .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
-          .replace(/\s+/g, "")
-          .trim();
-      }
+    ensureVideoPlaying();
+    document.addEventListener("pointerdown", ensureVideoPlaying, { passive: true });
+    document.addEventListener("touchstart", ensureVideoPlaying, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) ensureVideoPlaying();
+    });
+    window.addEventListener("focus", ensureVideoPlaying);
 
-      function getSavedAccounts() {
-        try {
-          const parsed = JSON.parse(localStorage.getItem(ACCOUNTS_STORAGE_KEY) || "{}");
-          return parsed && typeof parsed === "object" ? parsed : {};
-        } catch (_) {
-          return {};
-        }
-      }
+    ["pause", "ended", "stalled", "waiting", "suspend", "loadedmetadata", "canplay"].forEach((evt) => {
+      bgVideo.addEventListener(evt, ensureVideoPlaying);
+    });
 
-      function saveAccounts(accountsObj) {
-        try {
-          localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accountsObj));
-        } catch (_) {}
-      }
+    setInterval(ensureVideoPlaying, 600);
 
-      function setAuthTab(mode) {
-        const isRegister = mode === "register";
-        tabRegisterBtn.classList.toggle("active", isRegister);
-        tabRegisterBtn.setAttribute("aria-selected", String(isRegister));
-        tabLoginBtn.classList.toggle("active", !isRegister);
-        tabLoginBtn.setAttribute("aria-selected", String(!isRegister));
+    function normalizePhone(raw) {
+      return String(raw || "")
+        .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
+        .replace(/[^\d]/g, "")
+        .trim();
+    }
 
-        registerForm.classList.toggle("hidden", !isRegister);
-        loginForm.classList.toggle("hidden", isRegister);
-        registerMsg.textContent = "";
-        loginMsg.textContent = "";
-        registerMsg.className = "auth-msg";
-        loginMsg.className = "auth-msg";
-      }
+    function normalizeAsciiDigits(raw) {
+      return String(raw || "")
+        .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
+        .trim();
+    }
 
-      tabRegisterBtn.addEventListener("click", () => setAuthTab("register"));
-      tabLoginBtn.addEventListener("click", () => setAuthTab("login"));
-
-      function openMainDashboard() {
-        document.body.classList.add("panel-active");
-        welcomeScreen.classList.add("hidden");
-        thirdScreen.classList.add("hidden");
-        dashboardScreen.classList.remove("hidden");
-        setBackgroundVideo("bg.mp4");
-        try {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        } catch (_) {
-          window.scrollTo(0, 0);
-        }
-      }
-
-      function handleRegister(e) {
-        if (e) e.preventDefault();
-        const fullName = String(regNameInput.value || "").trim();
-        const phone = normalizePhone(regPhoneInput.value);
-        const password = String(regPasswordInput.value || "");
-        const sitePassword = normalizeCode(regSitePasswordInput.value);
-
-        registerMsg.className = "auth-msg";
-        registerMsg.textContent = "";
-
-        if (fullName.length < 2) {
-          registerMsg.className = "auth-msg error";
-          registerMsg.textContent = "من فضلك اكتب الاسم أولاً.";
-          regNameInput.focus();
-          return;
-        }
-
-        if (phone.length < 8) {
-          registerMsg.className = "auth-msg error";
-          registerMsg.textContent = "من فضلك أدخل رقم التليفون بشكل صحيح.";
-          regPhoneInput.focus();
-          return;
-        }
-
-        if (password.trim().length < 4) {
-          registerMsg.className = "auth-msg error";
-          registerMsg.textContent = "كلمة السر يجب ألا تقل عن 4 أحرف أو أرقام.";
-          regPasswordInput.focus();
-          return;
-        }
-
-        if (sitePassword !== SITE_ACCESS_PASSWORD) {
-          registerMsg.className = "auth-msg error";
-          registerMsg.textContent = "باسورد الموقع غير صحيح (الصحيح: 192.2.2.30).";
-          regSitePasswordInput.focus();
-          return;
-        }
-
-        const accounts = getSavedAccounts();
-        if (Object.prototype.hasOwnProperty.call(accounts, phone)) {
-          registerMsg.className = "auth-msg error";
-          registerMsg.textContent = "هذا الرقم مسجل بالفعل، اختر تبويب «تسجيل الدخول».";
-          return;
-        }
-
-        accounts[phone] = {
-          name: fullName,
-          password: password,
-          createdAt: Date.now()
-        };
-        saveAccounts(accounts);
-
-        registerMsg.className = "auth-msg success";
-        registerMsg.textContent = "تم إنشاء الحساب وحفظه بنجاح... جاري الدخول";
-        setTimeout(openMainDashboard, 250);
-      }
-
-      function handleLogin(e) {
-        if (e) e.preventDefault();
-        const fullName = String(loginNameInput.value || "").trim();
-        const phone = normalizePhone(loginPhoneInput.value);
-        const password = String(loginPasswordInput.value || "");
-        const sitePassword = normalizeCode(loginSitePasswordInput.value);
-
-        loginMsg.className = "auth-msg";
-        loginMsg.textContent = "";
-
-        if (fullName.length < 2) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "من فضلك اكتب الاسم أولاً.";
-          loginNameInput.focus();
-          return;
-        }
-
-        if (!phone) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "من فضلك أدخل رقم التليفون.";
-          loginPhoneInput.focus();
-          return;
-        }
-
-        if (!password) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "من فضلك أدخل كلمة السر.";
-          loginPasswordInput.focus();
-          return;
-        }
-
-        if (sitePassword !== SITE_ACCESS_PASSWORD) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "باسورد الموقع غير صحيح (الصحيح: 192.2.2.30).";
-          loginSitePasswordInput.focus();
-          return;
-        }
-
-        const accounts = getSavedAccounts();
-        const account = accounts[phone];
-
-        if (!account) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "هذا الرقم غير مسجل على هذا المتصفح، اضغط على «إنشاء حساب جديد» أولاً.";
-          return;
-        }
-
-        if (account.password !== password) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "كلمة السر غير صحيحة.";
-          loginPasswordInput.focus();
-          return;
-        }
-
-        if (account.name && account.name.trim().toLowerCase() !== fullName.toLowerCase()) {
-          loginMsg.className = "auth-msg error";
-          loginMsg.textContent = "الاسم غير مطابق للاسم المسجل لهذا الرقم.";
-          loginNameInput.focus();
-          return;
-        }
-
-        loginMsg.className = "auth-msg success";
-        loginMsg.textContent = "تم تسجيل الدخول بنجاح... جاري الدخول";
-        setTimeout(openMainDashboard, 250);
-      }
-
-      registerForm.addEventListener("submit", handleRegister);
-      loginForm.addEventListener("submit", handleLogin);
-
-      let currentThemeIndex = 0;
+    function getSavedAccounts() {
       try {
-        const savedIdx = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
-        if (!isNaN(savedIdx) && savedIdx >= 0 && savedIdx < THEMES_30.length) {
-          currentThemeIndex = savedIdx;
-        }
-      } catch (_) {}
+        const parsed = JSON.parse(localStorage.getItem(ACCOUNTS_STORAGE_KEY) || "{}");
+        return parsed && typeof parsed === "object" ? parsed : {};
+      } catch (_) {
+        return {};
+      }
+    }
 
-      THEMES_30.forEach((t, idx) => {
-        const labelText = `${idx + 1}/30 — ${t.name}`;
+    function saveAccounts(accountsObj) {
+      localStorage.setItem(ACCOUNTS_STORAGE_KEY, JSON.stringify(accountsObj));
+    }
 
-        const opt1 = document.createElement("option");
-        opt1.value = idx;
-        opt1.textContent = labelText;
-        themeSelect.appendChild(opt1);
+    function setAuthTab(mode) {
+      const isRegister = mode === "register";
+      tabRegisterBtn.classList.toggle("active", isRegister);
+      tabRegisterBtn.setAttribute("aria-selected", String(isRegister));
+      tabLoginBtn.classList.toggle("active", !isRegister);
+      tabLoginBtn.setAttribute("aria-selected", String(!isRegister));
 
-        const opt2 = document.createElement("option");
-        opt2.value = idx;
-        opt2.textContent = labelText;
-        authThemeSelect.appendChild(opt2);
-      });
+      registerForm.classList.toggle("hidden", !isRegister);
+      loginForm.classList.toggle("hidden", isRegister);
+      registerMsg.textContent = "";
+      loginMsg.textContent = "";
+      registerMsg.className = "auth-msg";
+      loginMsg.className = "auth-msg";
+    }
 
-      function applyTheme(index) {
-        currentThemeIndex = ((index % THEMES_30.length) + THEMES_30.length) % THEMES_30.length;
-        const t = THEMES_30[currentThemeIndex];
-        root.style.setProperty("--bg-main", t.bg);
-        root.style.setProperty("--bg-grad-1", t.g1);
-        root.style.setProperty("--bg-grad-2", t.g2);
-        root.style.setProperty("--surface", t.s1);
-        root.style.setProperty("--surface-2", t.s2);
-        root.style.setProperty("--border", t.b);
-        root.style.setProperty("--accent", t.a1);
-        root.style.setProperty("--accent-2", t.a2);
-        root.style.setProperty("--accent-glow", t.glow);
-        root.style.setProperty("--btn-text", t.bt);
+    tabRegisterBtn.addEventListener("click", () => setAuthTab("register"));
+    tabLoginBtn.addEventListener("click", () => setAuthTab("login"));
 
-        themeSelect.value = currentThemeIndex;
-        authThemeSelect.value = currentThemeIndex;
-        openThemesMenuBtn.textContent = `ثيم ${currentThemeIndex + 1}/30`;
-        authOpenThemesMenuBtn.textContent = `ثيم ${currentThemeIndex + 1}/30`;
-        authThemeName.textContent = `${t.name} (${currentThemeIndex + 1}/30)`;
+    function openMainDashboard() {
+      document.body.classList.add("panel-active");
+      welcomeScreen.classList.add("hidden");
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
+      setBackgroundVideo("bg.mp4");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fullName = String(regNameInput.value || "").trim();
+      const phone = normalizePhone(regPhoneInput.value);
+      const password = regPasswordInput.value;
+      const sitePassword = normalizeAsciiDigits(regSitePasswordInput.value);
+
+      registerMsg.className = "auth-msg";
+      registerMsg.textContent = "";
+
+      if (fullName.length < 2) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "من فضلك اكتب الاسم بشكل صحيح.";
+        return;
+      }
+
+      if (phone.length < 8) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "من فضلك أدخل رقم هاتف صحيح.";
+        return;
+      }
+
+      if (password.trim().length < 4) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "كلمة السر يجب ألا تقل عن 4 أحرف أو أرقام.";
+        return;
+      }
+
+      if (sitePassword !== SITE_ACCESS_PASSWORD) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "باسورد الموقع غير صحيح.";
+        return;
+      }
+
+      const accounts = getSavedAccounts();
+      if (Object.prototype.hasOwnProperty.call(accounts, phone)) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "هذا الرقم مسجل بالفعل ولا يمكن إنشاء حساب جديد بنفس الرقم.";
+        return;
+      }
+
+      accounts[phone] = {
+        name: fullName,
+        password: password,
+        createdAt: Date.now()
+      };
+      saveAccounts(accounts);
+
+      registerMsg.className = "auth-msg success";
+      registerMsg.textContent = "تم إنشاء الحساب وحفظه بنجاح...";
+      setTimeout(() => {
+        openMainDashboard();
+      }, 350);
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fullName = String(loginNameInput.value || "").trim();
+      const phone = normalizePhone(loginPhoneInput.value);
+      const password = loginPasswordInput.value;
+      const sitePassword = normalizeAsciiDigits(loginSitePasswordInput.value);
+
+      loginMsg.className = "auth-msg";
+      loginMsg.textContent = "";
+
+      if (fullName.length < 2) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "من فضلك اكتب الاسم بشكل صحيح.";
+        return;
+      }
+
+      if (!phone || !password) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "أدخل رقم الهاتف وكلمة السر.";
+        return;
+      }
+
+      if (sitePassword !== SITE_ACCESS_PASSWORD) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "باسورد الموقع غير صحيح.";
+        return;
+      }
+
+      const accounts = getSavedAccounts();
+      const account = accounts[phone];
+
+      if (!account) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "هذا الرقم غير مسجل، أنشئ حساباً جديداً أولاً.";
+        return;
+      }
+
+      if (account.password !== password) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "كلمة السر غير صحيحة.";
+        return;
+      }
+
+      if (account.name && account.name.toLowerCase() !== fullName.toLowerCase()) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "الاسم غير مطابق للحساب المسجل بهذا الرقم.";
+        return;
+      }
+
+      loginMsg.className = "auth-msg success";
+      loginMsg.textContent = "تم تسجيل الدخول بنجاح...";
+      setTimeout(() => {
+        openMainDashboard();
+      }, 300);
+    });
+
+    let currentThemeIndex = Number(localStorage.getItem("boodyPortalThemeIdx") || 0);
+    if (isNaN(currentThemeIndex) || currentThemeIndex < 0 || currentThemeIndex >= THEMES_30.length) {
+      currentThemeIndex = 0;
+    }
+
+    THEMES_30.forEach((t, idx) => {
+      const labelText = `${idx + 1}/30 — ${t.name}`;
+
+      const opt1 = document.createElement("option");
+      opt1.value = idx;
+      opt1.textContent = labelText;
+      themeSelect.appendChild(opt1);
+
+      const opt2 = document.createElement("option");
+      opt2.value = idx;
+      opt2.textContent = labelText;
+      authThemeSelect.appendChild(opt2);
+    });
+
+    function applyTheme(index) {
+      currentThemeIndex = ((index % THEMES_30.length) + THEMES_30.length) % THEMES_30.length;
+      const t = THEMES_30[currentThemeIndex];
+      root.style.setProperty("--bg-main", t.bg);
+      root.style.setProperty("--bg-grad-1", t.g1);
+      root.style.setProperty("--bg-grad-2", t.g2);
+      root.style.setProperty("--surface", t.s1);
+      root.style.setProperty("--surface-2", t.s2);
+      root.style.setProperty("--border", t.b);
+      root.style.setProperty("--accent", t.a1);
+      root.style.setProperty("--accent-2", t.a2);
+      root.style.setProperty("--accent-glow", t.glow);
+      root.style.setProperty("--btn-text", t.bt);
+
+      themeSelect.value = currentThemeIndex;
+      authThemeSelect.value = currentThemeIndex;
+      openThemesMenuBtn.textContent = `ثيم ${currentThemeIndex + 1}/30`;
+      authOpenThemesMenuBtn.textContent = `ثيم ${currentThemeIndex + 1}/30`;
+      authThemeName.textContent = `${t.name} (${currentThemeIndex + 1}/30)`;
+      localStorage.setItem("boodyPortalThemeIdx", String(currentThemeIndex));
+    }
+
+    function pickRandomTheme() {
+      if (THEMES_30.length <= 1) return;
+      let next = Math.floor(Math.random() * THEMES_30.length);
+      if (next === currentThemeIndex) next = (next + 1) % THEMES_30.length;
+      applyTheme(next);
+    }
+
+    applyTheme(currentThemeIndex);
+
+    openThirdScreenBtn.addEventListener("click", () => {
+      dashboardScreen.classList.add("hidden");
+      thirdScreen.classList.remove("hidden");
+      ensureVideoPlaying();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    backFromThirdBtn.addEventListener("click", () => {
+      thirdScreen.classList.add("hidden");
+      dashboardScreen.classList.remove("hidden");
+      ensureVideoPlaying();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    cycleThemeBtn.addEventListener("click", () => applyTheme(currentThemeIndex + 1));
+    authCycleThemeBtn.addEventListener("click", () => applyTheme(currentThemeIndex + 1));
+
+    openThemesMenuBtn.addEventListener("click", () => themeMenuBox.classList.toggle("open"));
+    authOpenThemesMenuBtn.addEventListener("click", () => authThemeMenuBox.classList.toggle("open"));
+
+    themeSelect.addEventListener("change", (e) => applyTheme(Number(e.target.value)));
+    authThemeSelect.addEventListener("change", (e) => applyTheme(Number(e.target.value)));
+
+    randomThemeBtn.addEventListener("click", pickRandomTheme);
+    authRandomThemeBtn.addEventListener("click", pickRandomTheme);
+
+    document.querySelectorAll(".copy-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const phone = btn.getAttribute("data-phone") || "";
         try {
-          localStorage.setItem("boodyPortalThemeIdx", String(currentThemeIndex));
-        } catch (_) {}
-      }
-
-      function pickRandomTheme() {
-        if (THEMES_30.length <= 1) return;
-        let next = Math.floor(Math.random() * THEMES_30.length);
-        if (next === currentThemeIndex) next = (next + 1) % THEMES_30.length;
-        applyTheme(next);
-      }
-
-      applyTheme(currentThemeIndex);
-
-      openThirdScreenBtn.addEventListener("click", () => {
-        dashboardScreen.classList.add("hidden");
-        thirdScreen.classList.remove("hidden");
-        ensureVideoPlaying();
-        window.scrollTo(0, 0);
+          await navigator.clipboard.writeText(phone);
+        } catch (_) {
+          const temp = document.createElement("textarea");
+          temp.value = phone;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+        }
+        const oldText = btn.textContent;
+        btn.textContent = "تم النسخ ✓";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = oldText;
+          btn.classList.remove("copied");
+        }, 1600);
       });
-
-      backFromThirdBtn.addEventListener("click", () => {
-        thirdScreen.classList.add("hidden");
-        dashboardScreen.classList.remove("hidden");
-        ensureVideoPlaying();
-        window.scrollTo(0, 0);
-      });
-
-      cycleThemeBtn.addEventListener("click", () => applyTheme(currentThemeIndex + 1));
-      authCycleThemeBtn.addEventListener("click", () => applyTheme(currentThemeIndex + 1));
-
-      openThemesMenuBtn.addEventListener("click", () => themeMenuBox.classList.toggle("open"));
-      authOpenThemesMenuBtn.addEventListener("click", () => authThemeMenuBox.classList.toggle("open"));
-
-      themeSelect.addEventListener("change", (e) => applyTheme(Number(e.target.value)));
-      authThemeSelect.addEventListener("change", (e) => applyTheme(Number(e.target.value)));
-
-      randomThemeBtn.addEventListener("click", pickRandomTheme);
-      authRandomThemeBtn.addEventListener("click", pickRandomTheme);
-
-      document.querySelectorAll(".open-pill").forEach((linkEl) => {
-        linkEl.addEventListener("click", (e) => {
-          const url = linkEl.getAttribute("href");
+    });
+  </script>
+</body>
+</html>
