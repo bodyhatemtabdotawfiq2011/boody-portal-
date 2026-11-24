@@ -9,14 +9,14 @@
       --bg-main: #060b0a;
       --bg-grad-1: rgba(16, 185, 129, 0.22);
       --bg-grad-2: rgba(6, 182, 212, 0.16);
-      --surface: rgba(12, 20, 19, 0.88);
-      --surface-2: rgba(18, 30, 28, 0.92);
+      --surface: rgba(12, 20, 19, 0.78);
+      --surface-2: rgba(18, 30, 28, 0.84);
       --border: rgba(52, 211, 153, 0.28);
       --accent: #10b981;
       --accent-2: #06b6d4;
       --accent-glow: rgba(16, 185, 129, 0.36);
       --text: #f1f5f9;
-      --muted: #94a3b8;
+      --muted: #cbd5e1;
       --btn-text: #04130e;
     }
 
@@ -30,10 +30,7 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 50% 0%, var(--bg-grad-1), transparent 44%),
-        radial-gradient(circle at 88% 28%, var(--bg-grad-2), transparent 46%),
-        var(--bg-main);
+      background: #070503;
       padding: 20px 14px 44px;
       display: flex;
       align-items: center;
@@ -43,16 +40,12 @@
       transition: background 0.35s ease, color 0.25s ease;
     }
 
-    body.auth-mode {
-      background: #070503;
-    }
-
     body.panel-active {
       align-items: flex-start;
     }
 
-    /* خلفية الفيديو الخاصة بواجهة الدخول فقط */
-    .auth-video-bg {
+    /* خلفية الفيديو */
+    .video-bg-layer {
       position: fixed;
       inset: 0;
       width: 100vw;
@@ -63,27 +56,36 @@
       background: #070503;
     }
 
-    body.panel-active .auth-video-bg {
-      display: none;
-    }
-
-    .auth-video-bg video {
+    .video-bg-layer video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.76) contrast(1.06);
+      filter: brightness(0.72) contrast(1.06);
     }
 
-    .auth-video-scrim {
+    .video-bg-scrim {
       position: fixed;
       inset: 0;
       background:
         radial-gradient(circle at 50% 0%, var(--bg-grad-1), transparent 48%),
         radial-gradient(circle at 85% 25%, var(--bg-grad-2), transparent 50%),
-        linear-gradient(180deg, rgba(7, 5, 3, 0.34), rgba(7, 5, 3, 0.64));
+        linear-gradient(180deg, rgba(7, 5, 3, 0.38), rgba(7, 5, 3, 0.68));
       pointer-events: none;
       transition: background 0.35s ease;
+    }
+
+    /* تبديل الفيديو بين واجهة الدخول وباقي الموقع */
+    #panelVideoLayer {
+      display: none;
+    }
+
+    body.panel-active #authVideoLayer {
+      display: none;
+    }
+
+    body.panel-active #panelVideoLayer {
+      display: block;
     }
 
     .app {
@@ -93,7 +95,7 @@
       max-width: 470px;
     }
 
-    /* واجهة الدخول الجديدة */
+    /* واجهة الدخول */
     .auth-card {
       width: 100%;
       background: var(--surface);
@@ -103,7 +105,7 @@
       margin: 0 auto;
       text-align: center;
       box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65), 0 0 28px var(--accent-glow);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -306,6 +308,7 @@
       border-radius: 16px;
       padding: 12px;
       margin-bottom: 14px;
+      backdrop-filter: blur(8px);
     }
 
     .theme-selector-wrap.open {
@@ -399,6 +402,7 @@
       border-radius: 14px;
       padding: 12px 10px;
       text-align: center;
+      backdrop-filter: blur(8px);
     }
 
     .stat-title {
@@ -432,6 +436,7 @@
       font-family: inherit;
       cursor: pointer;
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
       transition: transform 0.15s ease, filter 0.15s ease;
     }
 
@@ -463,6 +468,7 @@
       padding: 16px;
       margin-bottom: 14px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(8px);
     }
 
     .step-head {
@@ -512,7 +518,7 @@
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
     }
 
-    /* توزيع اللينكات كأعمدة/شبكة مع الحفاظ على شكل كل لينك */
+    /* توزيع اللينكات كأعمدة/شبكة مع الحفاظ على شكل اللينكات */
     .links-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -564,29 +570,12 @@
       display: block;
     }
 
-    .icon-tiktok {
-      background: #0d0f14;
-    }
-
-    .icon-whatsapp {
-      background: #12281e;
-    }
-
-    .icon-youtube {
-      background: #290e10;
-    }
-
-    .icon-google {
-      background: #161d2b;
-    }
-
-    .icon-instagram {
-      background: linear-gradient(135deg, #40184a, #7c1d38, #7c3512);
-    }
-
-    .icon-gemini {
-      background: #11182c;
-    }
+    .icon-tiktok { background: #0d0f14; }
+    .icon-whatsapp { background: #12281e; }
+    .icon-youtube { background: #290e10; }
+    .icon-google { background: #161d2b; }
+    .icon-instagram { background: linear-gradient(135deg, #40184a, #7c1d38, #7c3512); }
+    .icon-gemini { background: #11182c; }
 
     .link-title {
       font-size: 15px;
@@ -711,16 +700,26 @@
     }
   </style>
 </head>
-<body class="auth-mode">
-  <div class="auth-video-bg" aria-hidden="true">
+<body>
+  <!-- الفيديو الأول: واجهة الدخول -->
+  <div id="authVideoLayer" class="video-bg-layer" aria-hidden="true">
     <video id="authVideo" autoplay muted loop playsinline preload="auto">
       <source src="./auth-bg.mp4" type="video/mp4" />
     </video>
-    <div class="auth-video-scrim"></div>
+    <div class="video-bg-scrim"></div>
+  </div>
+
+  <!-- الفيديو الثاني: باقي الموقع -->
+  <div id="panelVideoLayer" class="video-bg-layer" aria-hidden="true">
+    <video id="panelVideo" autoplay muted loop playsinline preload="auto">
+      <source src="./bg.mp4" type="video/mp4" />
+      <source src="./auth-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="video-bg-scrim"></div>
   </div>
 
   <div class="app">
-    <!-- واجهة الدخول: إنشاء حساب جديد / تسجيل الدخول + تغيير الألوان بين 30 ميكس -->
+    <!-- واجهة الدخول -->
     <section id="welcomeScreen" class="auth-card">
       <div class="auth-theme-bar">
         <span id="authThemeName" class="auth-theme-label">ميكس 1/30</span>
@@ -745,7 +744,6 @@
         <button type="button" id="tabLoginBtn" class="auth-tab-btn" role="tab" aria-selected="false">تسجيل الدخول</button>
       </div>
 
-      <!-- نموذج إنشاء حساب جديد -->
       <form id="registerForm" class="auth-form" autocomplete="off">
         <div class="field-group">
           <label for="regPhone" class="field-label">رقم التليفون</label>
@@ -759,7 +757,6 @@
         <div id="registerMsg" class="auth-msg" aria-live="polite"></div>
       </form>
 
-      <!-- نموذج تسجيل الدخول -->
       <form id="loginForm" class="auth-form hidden" autocomplete="off">
         <div class="field-group">
           <label for="loginPhone" class="field-label">رقم التليفون</label>
@@ -855,12 +852,12 @@
       </section>
     </main>
 
-    <!-- الواجهة 3: شاشة اللينكات السريعة بتوزيع أعمدة/شبكة مع الحفاظ على شكل اللينكات -->
+    <!-- الواجهة 3: شاشة اللينكات السريعة -->
     <section id="thirdScreen" class="panel hidden">
       <div class="step-head">
         <div>
           <div class="step-title">اللينكات السريعة</div>
-          <div class="step-sub">متوفر العديد من اللينكات هنا</div>
+          <div class="step-sub">فتح مباشر على الويب بدون تحميل تطبيق</div>
         </div>
         <div class="step-badge">03</div>
       </div>
@@ -873,7 +870,6 @@
       </div>
 
       <div class="links-grid">
-        <!-- 1. تيك توك -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-tiktok" aria-hidden="true">
@@ -884,12 +880,11 @@
               </svg>
             </div>
             <div class="link-title">تيك توك</div>
-            <div class="link-sub">TikTok</div>
+            <div class="link-sub">TikTok Web</div>
           </div>
           <a class="open-pill" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
-        <!-- 2. واتس اب -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-whatsapp" aria-hidden="true">
@@ -899,12 +894,11 @@
               </svg>
             </div>
             <div class="link-title">واتس اب</div>
-            <div class="link-sub">WhatsApp</div>
+            <div class="link-sub">WhatsApp Web</div>
           </div>
-          <a class="open-pill" href="https://api.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+          <a class="open-pill" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
-        <!-- 3. يوتيوب -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-youtube" aria-hidden="true">
@@ -914,12 +908,11 @@
               </svg>
             </div>
             <div class="link-title">يوتيوب</div>
-            <div class="link-sub">YouTube</div>
+            <div class="link-sub">YouTube Web</div>
           </div>
-          <a class="open-pill" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+          <a class="open-pill" href="https://m.youtube.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
-        <!-- 4. جوجل -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-google" aria-hidden="true">
@@ -931,12 +924,11 @@
               </svg>
             </div>
             <div class="link-title">جوجل</div>
-            <div class="link-sub">Google</div>
+            <div class="link-sub">Google Web</div>
           </div>
           <a class="open-pill" href="https://www.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
-        <!-- 5. انستاجرام -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-instagram" aria-hidden="true">
@@ -947,12 +939,11 @@
               </svg>
             </div>
             <div class="link-title">انستاجرام</div>
-            <div class="link-sub">Instagram</div>
+            <div class="link-sub">Instagram Web</div>
           </div>
           <a class="open-pill" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
 
-        <!-- 6. جيميناى -->
         <div class="link-card">
           <div class="link-card-info">
             <div class="brand-icon icon-gemini" aria-hidden="true">
@@ -968,7 +959,7 @@
               </svg>
             </div>
             <div class="link-title">جيميناى</div>
-            <div class="link-sub">Gemini</div>
+            <div class="link-sub">Gemini Web</div>
           </div>
           <a class="open-pill" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
         </div>
@@ -980,42 +971,43 @@
 
   <script>
     const THEMES_30 = [
-      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.24)", g2: "rgba(6, 182, 212, 0.18)", s1: "rgba(12, 20, 19, 0.88)", s2: "rgba(18, 30, 28, 0.92)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.36)", bt: "#04130e" },
-      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.26)", g2: "rgba(139, 92, 246, 0.20)", s1: "rgba(20, 14, 30, 0.88)", s2: "rgba(30, 21, 44, 0.92)", b: "rgba(244, 114, 182, 0.28)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.38)", bt: "#190612" },
-      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.24)", g2: "rgba(244, 63, 94, 0.20)", s1: "rgba(13, 18, 34, 0.88)", s2: "rgba(20, 27, 48, 0.92)", b: "rgba(56, 189, 248, 0.28)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.36)", bt: "#05121d" },
-      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.24)", g2: "rgba(234, 88, 12, 0.18)", s1: "rgba(24, 19, 10, 0.88)", s2: "rgba(34, 27, 14, 0.92)", b: "rgba(251, 191, 36, 0.28)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.36)", bt: "#1d1202" },
-      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.26)", g2: "rgba(217, 70, 239, 0.18)", s1: "rgba(18, 12, 30, 0.88)", s2: "rgba(27, 19, 44, 0.92)", b: "rgba(192, 132, 252, 0.28)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.38)", bt: "#150624" },
-      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.24)", g2: "rgba(45, 212, 191, 0.18)", s1: "rgba(10, 21, 34, 0.88)", s2: "rgba(15, 31, 48, 0.92)", b: "rgba(56, 189, 248, 0.26)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.36)", bt: "#041622" },
-      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.24)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(28, 11, 14, 0.88)", s2: "rgba(38, 16, 20, 0.92)", b: "rgba(248, 113, 113, 0.28)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.36)", bt: "#210508" },
-      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.24)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(18, 24, 10, 0.88)", s2: "rgba(26, 34, 15, 0.92)", b: "rgba(163, 230, 53, 0.28)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.36)", bt: "#121d03" },
-      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.24)", g2: "rgba(251, 191, 36, 0.18)", s1: "rgba(27, 13, 17, 0.88)", s2: "rgba(37, 19, 24, 0.92)", b: "rgba(251, 113, 133, 0.28)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.36)", bt: "#22060c" },
-      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.24)", g2: "rgba(59, 130, 246, 0.18)", s1: "rgba(10, 23, 21, 0.88)", s2: "rgba(15, 33, 30, 0.92)", b: "rgba(45, 212, 191, 0.28)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.36)", bt: "#041916" },
-      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.26)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(14, 14, 34, 0.88)", s2: "rgba(21, 21, 48, 0.92)", b: "rgba(129, 140, 248, 0.28)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.36)", bt: "#0b0b24" },
-      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.26)", g2: "rgba(250, 204, 21, 0.18)", s1: "rgba(28, 15, 8, 0.88)", s2: "rgba(38, 22, 12, 0.92)", b: "rgba(251, 146, 60, 0.28)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.38)", bt: "#210d02" },
-      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.22)", g2: "rgba(125, 211, 252, 0.18)", s1: "rgba(12, 24, 19, 0.88)", s2: "rgba(18, 34, 28, 0.92)", b: "rgba(110, 231, 183, 0.26)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.35)", bt: "#051911" },
-      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.25)", g2: "rgba(244, 63, 94, 0.19)", s1: "rgba(28, 11, 25, 0.88)", s2: "rgba(39, 16, 35, 0.92)", b: "rgba(232, 121, 249, 0.28)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.36)", bt: "#21051e" },
-      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.24)", g2: "rgba(167, 139, 250, 0.18)", s1: "rgba(12, 22, 32, 0.88)", s2: "rgba(18, 31, 45, 0.92)", b: "rgba(125, 211, 252, 0.28)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.36)", bt: "#041420" },
-      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.24)", g2: "rgba(99, 102, 241, 0.19)", s1: "rgba(22, 11, 25, 0.88)", s2: "rgba(31, 16, 35, 0.92)", b: "rgba(217, 70, 239, 0.28)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.36)", bt: "#1c0420" },
-      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.22)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(25, 19, 10, 0.88)", s2: "rgba(35, 27, 15, 0.92)", b: "rgba(250, 204, 21, 0.26)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.35)", bt: "#1c1402" },
-      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.26)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(10, 22, 27, 0.88)", s2: "rgba(15, 32, 39, 0.92)", b: "rgba(34, 211, 238, 0.28)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.38)", bt: "#03181e" },
-      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.23)", g2: "rgba(192, 132, 252, 0.18)", s1: "rgba(25, 14, 22, 0.88)", s2: "rgba(35, 20, 31, 0.92)", b: "rgba(244, 114, 182, 0.28)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.36)", bt: "#200718" },
-      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.24)", g2: "rgba(163, 230, 53, 0.18)", s1: "rgba(11, 22, 15, 0.88)", s2: "rgba(17, 32, 22, 0.92)", b: "rgba(74, 222, 128, 0.28)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.36)", bt: "#04190c" },
-      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.26)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(12, 17, 34, 0.88)", s2: "rgba(18, 25, 48, 0.92)", b: "rgba(96, 165, 250, 0.28)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.38)", bt: "#061126" },
-      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.24)", g2: "rgba(245, 158, 11, 0.18)", s1: "rgba(26, 11, 18, 0.88)", s2: "rgba(37, 16, 26, 0.92)", b: "rgba(251, 113, 133, 0.28)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.36)", bt: "#20040d" },
-      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.25)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(16, 24, 11, 0.88)", s2: "rgba(24, 34, 16, 0.92)", b: "rgba(190, 242, 100, 0.28)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.36)", bt: "#131e03" },
-      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.26)", g2: "rgba(56, 189, 248, 0.18)", s1: "rgba(17, 12, 33, 0.88)", s2: "rgba(25, 18, 46, 0.92)", b: "rgba(167, 139, 250, 0.28)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.38)", bt: "#130729" },
-      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.24)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(28, 15, 12, 0.88)", s2: "rgba(38, 21, 17, 0.92)", b: "rgba(253, 186, 116, 0.28)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.36)", bt: "#210e05" },
-      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.24)", g2: "rgba(99, 102, 241, 0.18)", s1: "rgba(10, 21, 26, 0.88)", s2: "rgba(15, 31, 37, 0.92)", b: "rgba(34, 211, 238, 0.28)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.36)", bt: "#04181e" },
-      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.25)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(27, 11, 19, 0.88)", s2: "rgba(38, 16, 27, 0.92)", b: "rgba(251, 113, 133, 0.28)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.36)", bt: "#22050d" },
-      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.23)", g2: "rgba(20, 184, 166, 0.18)", s1: "rgba(20, 24, 13, 0.88)", s2: "rgba(29, 34, 19, 0.92)", b: "rgba(132, 204, 22, 0.26)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.35)", bt: "#101b03" },
-      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.26)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(11, 17, 34, 0.88)", s2: "rgba(16, 25, 48, 0.92)", b: "rgba(59, 130, 246, 0.28)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.38)", bt: "#061129" },
-      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.88)", s2: "rgba(21, 28, 44, 0.92)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.36)", bt: "#04140f" }
+      { name: "زمردي ليلي", bg: "#060b0a", g1: "rgba(16, 185, 129, 0.24)", g2: "rgba(6, 182, 212, 0.18)", s1: "rgba(12, 20, 19, 0.78)", s2: "rgba(18, 30, 28, 0.84)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#06b6d4", glow: "rgba(16, 185, 129, 0.36)", bt: "#04130e" },
+      { name: "نيون وردي وبنفسجي", bg: "#0b0712", g1: "rgba(236, 72, 153, 0.26)", g2: "rgba(139, 92, 246, 0.20)", s1: "rgba(20, 14, 30, 0.78)", s2: "rgba(30, 21, 44, 0.84)", b: "rgba(244, 114, 182, 0.28)", a1: "#ec4899", a2: "#8b5cf6", glow: "rgba(236, 72, 153, 0.38)", bt: "#190612" },
+      { name: "سايبربانك أزرق وقرمزي", bg: "#070913", g1: "rgba(56, 189, 248, 0.24)", g2: "rgba(244, 63, 94, 0.20)", s1: "rgba(13, 18, 34, 0.78)", s2: "rgba(20, 27, 48, 0.84)", b: "rgba(56, 189, 248, 0.28)", a1: "#38bdf8", a2: "#f43f5e", glow: "rgba(56, 189, 248, 0.36)", bt: "#05121d" },
+      { name: "ذهبي ملكي ليلي", bg: "#0d0a05", g1: "rgba(245, 158, 11, 0.24)", g2: "rgba(234, 88, 12, 0.18)", s1: "rgba(24, 19, 10, 0.78)", s2: "rgba(34, 27, 14, 0.84)", b: "rgba(251, 191, 36, 0.28)", a1: "#f59e0b", a2: "#fb7185", glow: "rgba(245, 158, 11, 0.36)", bt: "#1d1202" },
+      { name: "أرجواني كوني", bg: "#090612", g1: "rgba(168, 85, 247, 0.26)", g2: "rgba(217, 70, 239, 0.18)", s1: "rgba(18, 12, 30, 0.78)", s2: "rgba(27, 19, 44, 0.84)", b: "rgba(192, 132, 252, 0.28)", a1: "#a855f7", a2: "#e879f9", glow: "rgba(168, 85, 247, 0.38)", bt: "#150624" },
+      { name: "محيط أزرق عميق", bg: "#050c14", g1: "rgba(14, 165, 233, 0.24)", g2: "rgba(45, 212, 191, 0.18)", s1: "rgba(10, 21, 34, 0.78)", s2: "rgba(15, 31, 48, 0.84)", b: "rgba(56, 189, 248, 0.26)", a1: "#0ea5e9", a2: "#2dd4bf", glow: "rgba(14, 165, 233, 0.36)", bt: "#041622" },
+      { name: "قرمزي ناري", bg: "#120608", g1: "rgba(239, 68, 68, 0.24)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(28, 11, 14, 0.78)", s2: "rgba(38, 16, 20, 0.84)", b: "rgba(248, 113, 113, 0.28)", a1: "#ef4444", a2: "#f97316", glow: "rgba(239, 68, 68, 0.36)", bt: "#210508" },
+      { name: "ليموني كهربائي", bg: "#0a0d05", g1: "rgba(132, 204, 22, 0.24)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(18, 24, 10, 0.78)", s2: "rgba(26, 34, 15, 0.84)", b: "rgba(163, 230, 53, 0.28)", a1: "#84cc16", a2: "#10b981", glow: "rgba(132, 204, 22, 0.36)", bt: "#121d03" },
+      { name: "مرجاني غروب", bg: "#12080a", g1: "rgba(251, 113, 133, 0.24)", g2: "rgba(251, 191, 36, 0.18)", s1: "rgba(27, 13, 17, 0.78)", s2: "rgba(37, 19, 24, 0.84)", b: "rgba(251, 113, 133, 0.28)", a1: "#fb7185", a2: "#fbbf24", glow: "rgba(251, 113, 133, 0.36)", bt: "#22060c" },
+      { name: "تركواز سحري", bg: "#050d0c", g1: "rgba(20, 184, 166, 0.24)", g2: "rgba(59, 130, 246, 0.18)", s1: "rgba(10, 23, 21, 0.78)", s2: "rgba(15, 33, 30, 0.84)", b: "rgba(45, 212, 191, 0.28)", a1: "#14b8a6", a2: "#3b82f6", glow: "rgba(20, 184, 166, 0.36)", bt: "#041916" },
+      { name: "نيلي شفق", bg: "#070714", g1: "rgba(99, 102, 241, 0.26)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(14, 14, 34, 0.78)", s2: "rgba(21, 21, 48, 0.84)", b: "rgba(129, 140, 248, 0.28)", a1: "#6366f1", a2: "#ec4899", glow: "rgba(99, 102, 241, 0.36)", bt: "#0b0b24" },
+      { name: "برتقالي شراري", bg: "#120904", g1: "rgba(249, 115, 22, 0.26)", g2: "rgba(250, 204, 21, 0.18)", s1: "rgba(28, 15, 8, 0.78)", s2: "rgba(38, 22, 12, 0.84)", b: "rgba(251, 146, 60, 0.28)", a1: "#f97316", a2: "#facc15", glow: "rgba(249, 115, 22, 0.38)", bt: "#210d02" },
+      { name: "نعناعي بارد", bg: "#060e0b", g1: "rgba(52, 211, 153, 0.22)", g2: "rgba(125, 211, 252, 0.18)", s1: "rgba(12, 24, 19, 0.78)", s2: "rgba(18, 34, 28, 0.84)", b: "rgba(110, 231, 183, 0.26)", a1: "#34d399", a2: "#7dd3fc", glow: "rgba(52, 211, 153, 0.35)", bt: "#051911" },
+      { name: "ماجنتا حاد", bg: "#120610", g1: "rgba(217, 70, 239, 0.25)", g2: "rgba(244, 63, 94, 0.19)", s1: "rgba(28, 11, 25, 0.78)", s2: "rgba(39, 16, 35, 0.84)", b: "rgba(232, 121, 249, 0.28)", a1: "#d946ef", a2: "#f43f5e", glow: "rgba(217, 70, 239, 0.36)", bt: "#21051e" },
+      { name: "سماوي جليدي", bg: "#060c12", g1: "rgba(125, 211, 252, 0.24)", g2: "rgba(167, 139, 250, 0.18)", s1: "rgba(12, 22, 32, 0.78)", s2: "rgba(18, 31, 45, 0.84)", b: "rgba(125, 211, 252, 0.28)", a1: "#38bdf8", a2: "#a78bfa", glow: "rgba(56, 189, 248, 0.36)", bt: "#041420" },
+      { name: "توتي داكن", bg: "#0e0610", g1: "rgba(192, 38, 211, 0.24)", g2: "rgba(99, 102, 241, 0.19)", s1: "rgba(22, 11, 25, 0.78)", s2: "rgba(31, 16, 35, 0.84)", b: "rgba(217, 70, 239, 0.28)", a1: "#c026d3", a2: "#818cf8", glow: "rgba(192, 38, 211, 0.36)", bt: "#1c0420" },
+      { name: "عسلي دافئ", bg: "#100b05", g1: "rgba(234, 179, 8, 0.22)", g2: "rgba(249, 115, 22, 0.18)", s1: "rgba(25, 19, 10, 0.78)", s2: "rgba(35, 27, 15, 0.84)", b: "rgba(250, 204, 21, 0.26)", a1: "#eab308", a2: "#f97316", glow: "rgba(234, 179, 8, 0.35)", bt: "#1c1402" },
+      { name: "أكوا ليزر", bg: "#050d10", g1: "rgba(34, 211, 238, 0.26)", g2: "rgba(16, 185, 129, 0.18)", s1: "rgba(10, 22, 27, 0.78)", s2: "rgba(15, 32, 39, 0.84)", b: "rgba(34, 211, 238, 0.28)", a1: "#22d3ee", a2: "#34d399", glow: "rgba(34, 211, 238, 0.38)", bt: "#03181e" },
+      { name: "وردي باستيل ليلي", bg: "#10080e", g1: "rgba(244, 114, 182, 0.23)", g2: "rgba(192, 132, 252, 0.18)", s1: "rgba(25, 14, 22, 0.78)", s2: "rgba(35, 20, 31, 0.84)", b: "rgba(244, 114, 182, 0.28)", a1: "#f472b6", a2: "#c084fc", glow: "rgba(244, 114, 182, 0.36)", bt: "#200718" },
+      { name: "أخضر غابات ليلي", bg: "#060c08", g1: "rgba(34, 197, 94, 0.24)", g2: "rgba(163, 230, 53, 0.18)", s1: "rgba(11, 22, 15, 0.78)", s2: "rgba(17, 32, 22, 0.84)", b: "rgba(74, 222, 128, 0.28)", a1: "#22c55e", a2: "#a3e635", glow: "rgba(34, 197, 94, 0.36)", bt: "#04190c" },
+      { name: "ياقوتي أزرق", bg: "#060915", g1: "rgba(59, 130, 246, 0.26)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(12, 17, 34, 0.78)", s2: "rgba(18, 25, 48, 0.84)", b: "rgba(96, 165, 250, 0.28)", a1: "#3b82f6", a2: "#a855f7", glow: "rgba(59, 130, 246, 0.38)", bt: "#061126" },
+      { name: "عنابي فاخر", bg: "#11060b", g1: "rgba(225, 29, 72, 0.24)", g2: "rgba(245, 158, 11, 0.18)", s1: "rgba(26, 11, 18, 0.78)", s2: "rgba(37, 16, 26, 0.84)", b: "rgba(251, 113, 133, 0.28)", a1: "#e11d48", a2: "#f59e0b", glow: "rgba(225, 29, 72, 0.36)", bt: "#20040d" },
+      { name: "لايم نيون", bg: "#090d06", g1: "rgba(163, 230, 53, 0.25)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(16, 24, 11, 0.78)", s2: "rgba(24, 34, 16, 0.84)", b: "rgba(190, 242, 100, 0.28)", a1: "#a3e635", a2: "#22d3ee", glow: "rgba(163, 230, 53, 0.36)", bt: "#131e03" },
+      { name: "بنفسجي فاحم", bg: "#090614", g1: "rgba(139, 92, 246, 0.26)", g2: "rgba(56, 189, 248, 0.18)", s1: "rgba(17, 12, 33, 0.78)", s2: "rgba(25, 18, 46, 0.84)", b: "rgba(167, 139, 250, 0.28)", a1: "#8b5cf6", a2: "#38bdf8", glow: "rgba(139, 92, 246, 0.38)", bt: "#130729" },
+      { name: "خوخي غروب", bg: "#120907", g1: "rgba(251, 146, 60, 0.24)", g2: "rgba(236, 72, 153, 0.18)", s1: "rgba(28, 15, 12, 0.78)", s2: "rgba(38, 21, 17, 0.84)", b: "rgba(253, 186, 116, 0.28)", a1: "#fb923c", a2: "#ec4899", glow: "rgba(251, 146, 60, 0.36)", bt: "#210e05" },
+      { name: "سيان جليدي", bg: "#050c0f", g1: "rgba(6, 182, 212, 0.24)", g2: "rgba(99, 102, 241, 0.18)", s1: "rgba(10, 21, 26, 0.78)", s2: "rgba(15, 31, 37, 0.84)", b: "rgba(34, 211, 238, 0.28)", a1: "#06b6d4", a2: "#818cf8", glow: "rgba(6, 182, 212, 0.36)", bt: "#04181e" },
+      { name: "فراولة داكنة", bg: "#12060c", g1: "rgba(244, 63, 94, 0.25)", g2: "rgba(168, 85, 247, 0.18)", s1: "rgba(27, 11, 19, 0.78)", s2: "rgba(38, 16, 27, 0.84)", b: "rgba(251, 113, 133, 0.28)", a1: "#f43f5e", a2: "#a855f7", glow: "rgba(244, 63, 94, 0.36)", bt: "#22050d" },
+      { name: "زيتوني عصري", bg: "#0b0d07", g1: "rgba(101, 163, 13, 0.23)", g2: "rgba(20, 184, 166, 0.18)", s1: "rgba(20, 24, 13, 0.78)", s2: "rgba(29, 34, 19, 0.84)", b: "rgba(132, 204, 22, 0.26)", a1: "#65a30d", a2: "#14b8a6", glow: "rgba(101, 163, 13, 0.35)", bt: "#101b03" },
+      { name: "أزرق كهربائي", bg: "#050914", g1: "rgba(37, 99, 235, 0.26)", g2: "rgba(34, 211, 238, 0.18)", s1: "rgba(11, 17, 34, 0.78)", s2: "rgba(16, 25, 48, 0.84)", b: "rgba(59, 130, 246, 0.28)", a1: "#2563eb", a2: "#22d3ee", glow: "rgba(37, 99, 235, 0.38)", bt: "#061129" },
+      { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.78)", s2: "rgba(21, 28, 44, 0.84)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.36)", bt: "#04140f" }
     ];
 
     const ACCOUNTS_STORAGE_KEY = "boodyPortalAccountsV1";
 
     const root = document.documentElement;
     const authVideo = document.getElementById("authVideo");
+    const panelVideo = document.getElementById("panelVideo");
     const welcomeScreen = document.getElementById("welcomeScreen");
     const dashboardScreen = document.getElementById("dashboardScreen");
     const thirdScreen = document.getElementById("thirdScreen");
@@ -1049,30 +1041,43 @@
     const themeSelect = document.getElementById("themeSelect");
     const randomThemeBtn = document.getElementById("randomThemeBtn");
 
-    function ensureAuthVideoPlaying() {
-      if (!authVideo || document.body.classList.contains("panel-active")) return;
-      authVideo.muted = true;
-      authVideo.defaultMuted = true;
-      authVideo.loop = true;
-      if (authVideo.paused || authVideo.ended) {
-        if (authVideo.ended) authVideo.currentTime = 0;
-        authVideo.play().catch(() => {});
+    function keepVideoRunning(videoEl) {
+      if (!videoEl) return;
+      videoEl.muted = true;
+      videoEl.defaultMuted = true;
+      videoEl.loop = true;
+      if (videoEl.readyState === 0) {
+        try { videoEl.load(); } catch (_) {}
+      }
+      if (videoEl.ended) {
+        try { videoEl.currentTime = 0; } catch (_) {}
+      }
+      if (videoEl.paused) {
+        videoEl.play().catch(() => {});
       }
     }
 
-    ensureAuthVideoPlaying();
-    document.addEventListener("pointerdown", ensureAuthVideoPlaying, { passive: true });
-    document.addEventListener("touchstart", ensureAuthVideoPlaying, { passive: true });
-    document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) ensureAuthVideoPlaying();
-    });
-    if (authVideo) {
-      authVideo.addEventListener("pause", ensureAuthVideoPlaying);
-      authVideo.addEventListener("ended", ensureAuthVideoPlaying);
-      authVideo.addEventListener("stalled", ensureAuthVideoPlaying);
-      authVideo.addEventListener("waiting", ensureAuthVideoPlaying);
+    function keepAllVideosRunning() {
+      keepVideoRunning(authVideo);
+      keepVideoRunning(panelVideo);
     }
-    setInterval(ensureAuthVideoPlaying, 1200);
+
+    keepAllVideosRunning();
+    document.addEventListener("pointerdown", keepAllVideosRunning, { passive: true });
+    document.addEventListener("touchstart", keepAllVideosRunning, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) keepAllVideosRunning();
+    });
+    window.addEventListener("focus", keepAllVideosRunning);
+
+    [authVideo, panelVideo].forEach((vid) => {
+      if (!vid) return;
+      ["pause", "ended", "stalled", "waiting", "suspend", "emptied", "loadedmetadata", "canplay"].forEach((evt) => {
+        vid.addEventListener(evt, () => keepVideoRunning(vid));
+      });
+    });
+
+    setInterval(keepAllVideosRunning, 700);
 
     function normalizePhone(raw) {
       return String(raw || "")
@@ -1113,12 +1118,11 @@
     tabLoginBtn.addEventListener("click", () => setAuthTab("login"));
 
     function openMainDashboard() {
-      if (authVideo) authVideo.pause();
-      document.body.classList.remove("auth-mode");
       document.body.classList.add("panel-active");
       welcomeScreen.classList.add("hidden");
       thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
+      keepAllVideosRunning();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -1251,12 +1255,14 @@
     openThirdScreenBtn.addEventListener("click", () => {
       dashboardScreen.classList.add("hidden");
       thirdScreen.classList.remove("hidden");
+      keepAllVideosRunning();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     backFromThirdBtn.addEventListener("click", () => {
       thirdScreen.classList.add("hidden");
       dashboardScreen.classList.remove("hidden");
+      keepAllVideosRunning();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
