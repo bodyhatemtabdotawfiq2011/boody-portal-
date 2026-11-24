@@ -457,20 +457,6 @@
       backdrop-filter: blur(6px);
     }
 
-    .top-cloud {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 14px;
-      margin-bottom: 12px;
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
     .step-head {
       display: flex;
       align-items: flex-start;
@@ -857,8 +843,6 @@
 
     <!-- الواجهة 3: شاشة اللينكات السريعة -->
     <section id="thirdScreen" class="panel hidden">
-      <div class="top-cloud">☁️ اضغط على أي لينك لفتحه دون تحميل التطبيق</div>
-
       <div class="step-head">
         <div>
           <div class="step-title">اللينكات السريعة</div>
@@ -1347,4 +1331,11 @@
         btn.textContent = "تم النسخ ✓";
         btn.classList.add("copied");
         setTimeout(() => {
-          btn.te
+          btn.textContent = oldText;
+          btn.classList.remove("copied");
+        }, 1600);
+      });
+    });
+  </script>
+</body>
+</html>
