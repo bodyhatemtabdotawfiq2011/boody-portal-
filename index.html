@@ -719,6 +719,10 @@
 
       <form id="registerForm" class="auth-form" autocomplete="off">
         <div class="field-group">
+          <label for="regName" class="field-label">الاسم</label>
+          <input id="regName" type="text" class="field-input" placeholder="اكتب اسمك" required />
+        </div>
+        <div class="field-group">
           <label for="regPhone" class="field-label">رقم التليفون</label>
           <input id="regPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
         </div>
@@ -726,11 +730,19 @@
           <label for="regPassword" class="field-label">كلمة السر</label>
           <input id="regPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة سر قوية" required />
         </div>
+        <div class="field-group">
+          <label for="regSitePassword" class="field-label">باسورد الموقع</label>
+          <input id="regSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" required />
+        </div>
         <button type="submit" class="auth-submit-btn">إنشاء حساب والدخول ←</button>
         <div id="registerMsg" class="auth-msg" aria-live="polite"></div>
       </form>
 
       <form id="loginForm" class="auth-form hidden" autocomplete="off">
+        <div class="field-group">
+          <label for="loginName" class="field-label">الاسم</label>
+          <input id="loginName" type="text" class="field-input" placeholder="اكتب اسمك" required />
+        </div>
         <div class="field-group">
           <label for="loginPhone" class="field-label">رقم التليفون</label>
           <input id="loginPhone" type="tel" inputmode="numeric" class="field-input ltr-input" placeholder="01xxxxxxxxx" required />
@@ -738,6 +750,10 @@
         <div class="field-group">
           <label for="loginPassword" class="field-label">كلمة السر</label>
           <input id="loginPassword" type="password" class="field-input ltr-input" placeholder="اكتب كلمة السر" required />
+        </div>
+        <div class="field-group">
+          <label for="loginSitePassword" class="field-label">باسورد الموقع</label>
+          <input id="loginSitePassword" type="password" class="field-input ltr-input" placeholder="اكتب باسورد الموقع" required />
         </div>
         <button type="submit" class="auth-submit-btn">تسجيل الدخول ←</button>
         <div id="loginMsg" class="auth-msg" aria-live="polite"></div>
@@ -976,6 +992,7 @@
       { name: "أورورا شامل", bg: "#070a12", g1: "rgba(16, 185, 129, 0.22)", g2: "rgba(236, 72, 153, 0.22)", s1: "rgba(14, 19, 31, 0.72)", s2: "rgba(21, 28, 44, 0.78)", b: "rgba(52, 211, 153, 0.28)", a1: "#10b981", a2: "#ec4899", glow: "rgba(16, 185, 129, 0.36)", bt: "#04140f" }
     ];
 
+    const SITE_ACCESS_PASSWORD = String.fromCharCode(49, 57, 50, 46, 50, 46, 50, 46, 51, 48);
     const ACCOUNTS_STORAGE_KEY = "boodyPortalAccountsV1";
 
     const root = document.documentElement;
@@ -996,12 +1013,16 @@
     const registerForm = document.getElementById("registerForm");
     const loginForm = document.getElementById("loginForm");
 
+    const regNameInput = document.getElementById("regName");
     const regPhoneInput = document.getElementById("regPhone");
     const regPasswordInput = document.getElementById("regPassword");
+    const regSitePasswordInput = document.getElementById("regSitePassword");
     const registerMsg = document.getElementById("registerMsg");
 
+    const loginNameInput = document.getElementById("loginName");
     const loginPhoneInput = document.getElementById("loginPhone");
     const loginPasswordInput = document.getElementById("loginPassword");
+    const loginSitePasswordInput = document.getElementById("loginSitePassword");
     const loginMsg = document.getElementById("loginMsg");
 
     const openThirdScreenBtn = document.getElementById("openThirdScreenBtn");
@@ -1060,6 +1081,12 @@
         .trim();
     }
 
+    function normalizeAsciiDigits(raw) {
+      return String(raw || "")
+        .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632))
+        .trim();
+    }
+
     function getSavedAccounts() {
       try {
         const parsed = JSON.parse(localStorage.getItem(ACCOUNTS_STORAGE_KEY) || "{}");
@@ -1102,11 +1129,19 @@
 
     registerForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      const fullName = String(regNameInput.value || "").trim();
       const phone = normalizePhone(regPhoneInput.value);
       const password = regPasswordInput.value;
+      const sitePassword = normalizeAsciiDigits(regSitePasswordInput.value);
 
       registerMsg.className = "auth-msg";
       registerMsg.textContent = "";
+
+      if (fullName.length < 2) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "من فضلك اكتب الاسم بشكل صحيح.";
+        return;
+      }
 
       if (phone.length < 8) {
         registerMsg.className = "auth-msg error";
@@ -1120,6 +1155,12 @@
         return;
       }
 
+      if (sitePassword !== SITE_ACCESS_PASSWORD) {
+        registerMsg.className = "auth-msg error";
+        registerMsg.textContent = "باسورد الموقع غير صحيح.";
+        return;
+      }
+
       const accounts = getSavedAccounts();
       if (Object.prototype.hasOwnProperty.call(accounts, phone)) {
         registerMsg.className = "auth-msg error";
@@ -1128,6 +1169,7 @@
       }
 
       accounts[phone] = {
+        name: fullName,
         password: password,
         createdAt: Date.now()
       };
@@ -1142,15 +1184,29 @@
 
     loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      const fullName = String(loginNameInput.value || "").trim();
       const phone = normalizePhone(loginPhoneInput.value);
       const password = loginPasswordInput.value;
+      const sitePassword = normalizeAsciiDigits(loginSitePasswordInput.value);
 
       loginMsg.className = "auth-msg";
       loginMsg.textContent = "";
 
+      if (fullName.length < 2) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "من فضلك اكتب الاسم بشكل صحيح.";
+        return;
+      }
+
       if (!phone || !password) {
         loginMsg.className = "auth-msg error";
         loginMsg.textContent = "أدخل رقم الهاتف وكلمة السر.";
+        return;
+      }
+
+      if (sitePassword !== SITE_ACCESS_PASSWORD) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "باسورد الموقع غير صحيح.";
         return;
       }
 
@@ -1166,6 +1222,12 @@
       if (account.password !== password) {
         loginMsg.className = "auth-msg error";
         loginMsg.textContent = "كلمة السر غير صحيحة.";
+        return;
+      }
+
+      if (account.name && account.name.toLowerCase() !== fullName.toLowerCase()) {
+        loginMsg.className = "auth-msg error";
+        loginMsg.textContent = "الاسم غير مطابق للحساب المسجل بهذا الرقم.";
         return;
       }
 
