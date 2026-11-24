@@ -457,6 +457,19 @@
       backdrop-filter: blur(6px);
     }
 
+    .cloud-banner {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    }
+
     .step-head {
       display: flex;
       align-items: flex-start;
@@ -843,6 +856,8 @@
 
     <!-- الواجهة 3: شاشة اللينكات السريعة -->
     <section id="thirdScreen" class="panel hidden">
+      <div class="cloud-banner">☁️ اضغط على أي لينك لفتحه دون تحميل التطبيق</div>
+
       <div class="step-head">
         <div>
           <div class="step-title">اللينكات السريعة</div>
@@ -1073,6 +1088,18 @@
     });
 
     setInterval(ensureVideoPlaying, 600);
+
+    document.querySelectorAll(".open-pill").forEach((linkEl) => {
+      linkEl.addEventListener("click", (e) => {
+        const url = linkEl.getAttribute("href");
+        if (!url) return;
+        const win = window.open(url, "_blank", "noopener,noreferrer");
+        if (!win) {
+          e.preventDefault();
+          window.location.href = url;
+        }
+      });
+    });
 
     function normalizePhone(raw) {
       return String(raw || "")
@@ -1320,22 +1347,4 @@
         try {
           await navigator.clipboard.writeText(phone);
         } catch (_) {
-          const temp = document.createElement("textarea");
-          temp.value = phone;
-          document.body.appendChild(temp);
-          temp.select();
-          document.execCommand("copy");
-          document.body.removeChild(temp);
-        }
-        const oldText = btn.textContent;
-        btn.textContent = "تم النسخ ✓";
-        btn.classList.add("copied");
-        setTimeout(() => {
-          btn.textContent = oldText;
-          btn.classList.remove("copied");
-        }, 1600);
-      });
-    });
-  </script>
-</body>
-</html>
+          const temp = doc
